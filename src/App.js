@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom'
-import './App.css';
+import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+import './App.css'
 
-import {LandingPage} from './components/landing-page'
+import { LandingPage } from './components/landing-page'
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <div>
-        <Switch>
-          <Route exact path="/" component={LandingPage} />
-        </Switch>
+        <Route exact path="/" component={LandingPage}/>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
