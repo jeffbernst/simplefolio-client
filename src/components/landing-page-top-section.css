@@ -1,6 +1,6 @@
 .background {
   background-color: var(--purple);
-  height: 100vh;
+  height: 700px;
   width: 100%;
   padding-top: 50px;
 }
@@ -36,4 +36,43 @@ nav button {
 nav button:hover {
   background-color: white;
   color: var(--purple);
+}
+
+.landing-message {
+  margin: 160px auto 0 auto;
+  width: 800px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-copy-and-button {
+  margin-left: 20px;
+  width: 500px;
+  text-align: center;
+}
+
+.landing-copy {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  line-height: 40px;
+}
+
+button.get-started {
+  background-color: var(--pink);
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  border-radius: 8px;
+  width: 200px;
+  margin-top: 20px;
+  padding: 5px 0;
+}
+
+button.get-started:hover {
+  background-color: white;
+  color: var(--pink);
 }
