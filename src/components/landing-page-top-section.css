@@ -1,0 +1,39 @@
+.background {
+  background-color: var(--purple);
+  height: 100vh;
+  width: 100%;
+  padding-top: 50px;
+}
+
+.container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-logo {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+}
+
+nav button {
+  border: 3px solid white;
+  background: none;
+  padding: 5px 8px;
+  border-radius: 8px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+nav button:hover {
+  background-color: white;
+  color: var(--purple);
+}
