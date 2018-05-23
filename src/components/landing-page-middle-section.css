@@ -2,6 +2,7 @@
   background-color: #EEEEEE;
   width: 100%;
   padding-top: 90px;
+  padding-bottom: 90px;
 }
 
 .landing-copy {
@@ -24,6 +25,6 @@
 }
 
 .purple-pie-chart {
-  margin-top: -20px;
+  margin-top: -15px;
 }
 
