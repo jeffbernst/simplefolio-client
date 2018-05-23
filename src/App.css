@@ -2,6 +2,8 @@ body {
   font-family: "Avenir Next", sans-serif;
   --purple: #A084D1;
   --pink: #F934AA;
+  --dark-gray: #4A4A4A;
+  color: var(--dark-gray);
 }
 
 button {

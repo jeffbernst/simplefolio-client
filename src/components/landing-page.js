@@ -1,11 +1,13 @@
 import React from 'react'
-import {LandingPageTopSection} from './landing-page-top-section'
+import { LandingPageTopSection } from './landing-page-top-section'
+import { LandingPageMiddleSection } from './landing-page-middle-section'
 import './landing-page.css'
 
 export function LandingPage () {
   return (
     <div>
-      <LandingPageTopSection />
+      <LandingPageTopSection/>
+      <LandingPageMiddleSection/>
     </div>
   )
 }

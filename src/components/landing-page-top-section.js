@@ -21,7 +21,7 @@ export function LandingPageTopSection () {
     </svg>
 
   return (
-    <div className="background">
+    <div className="background-top">
       <div className="container">
         <nav>
           <div className="site-logo">Simplefolio</div>
@@ -33,7 +33,7 @@ export function LandingPageTopSection () {
         <div className="landing-message">
           {yellowPieChart}
           <div className="landing-copy-and-button">
-            <div className="landing-copy">
+            <div className="landing-copy-top">
               A simple cryptocurrency portfolio for those
               who don’t want to get bogged down with
               complicated features.
