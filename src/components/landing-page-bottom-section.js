@@ -6,8 +6,7 @@ export function LandingPageBottomSection () {
     <div className="background-bottom">
       <div className="container">
         <div className="landing-copy">
-          Simplefolio also has a watchlist feature with only the
-          important info you need to know.
+          Simplefolio also has a watchlist feature to track the coins you're interested in.
         </div>
         <div className="watchlist-title">Watchlist</div>
         <div className="watchlist-grid">
