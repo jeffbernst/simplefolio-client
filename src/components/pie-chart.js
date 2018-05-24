@@ -30,10 +30,10 @@ export class PieChart extends Component {
         radius={200}
         getAngle={d => d.theta}
         data={[
-          {theta: 2, symbol: 'BTC', percentage: 25, style: {fill: blue, stroke: darkGray, strokeWidth: 3}},
-          {theta: 4, symbol: 'BTC', percentage: 25, style: {fill: pink, stroke: darkGray, strokeWidth: 3}},
-          {theta: 2, symbol: 'BTC', percentage: 25, style: {fill: purple, stroke: darkGray, strokeWidth: 3}},
-          {theta: 2, symbol: 'BTC', percentage: 25, style: {fill: orange, stroke: darkGray, strokeWidth: 3}},
+          {theta: 2, symbol: 'BTC', percentage: 25, style: {fill: blue, stroke: darkGray, strokeWidth: 3}, className: 'pie-slice'},
+          {theta: 4, symbol: 'BTC', percentage: 25, style: {fill: pink, stroke: darkGray, strokeWidth: 3}, className: 'pie-slice'},
+          {theta: 2, symbol: 'BTC', percentage: 25, style: {fill: purple, stroke: darkGray, strokeWidth: 3}, className: 'pie-slice'},
+          {theta: 2, symbol: 'BTC', percentage: 25, style: {fill: orange, stroke: darkGray, strokeWidth: 3}, className: 'pie-slice'},
         ]}
         onValueMouseOver={v => this.setState({value: v})}
         onSeriesMouseOut={() => this.setState({value: false})}

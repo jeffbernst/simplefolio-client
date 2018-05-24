@@ -15,6 +15,11 @@ nav {
   font-size: 48px;
   font-weight: bold;
   color: white;
+  cursor: pointer;
+}
+
+.site-logo:hover {
+  color: var(--pink);
 }
 
 nav button {

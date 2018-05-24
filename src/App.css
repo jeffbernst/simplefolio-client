@@ -9,3 +9,10 @@ body {
 button {
   cursor: pointer;
 }
+
+.fade-in-out {
+  transition: 200ms;
+  transition-timing-function: ease-in-out;
+  -webkit-transition: 200ms;
+  -webkit-transition-timing-function: ease-in-out;
+}

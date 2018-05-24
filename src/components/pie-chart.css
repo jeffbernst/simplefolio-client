@@ -3,10 +3,13 @@
   border-radius: 50%;
 }
 
-/*.pie-slice {*/
-  /*stroke: var(--dark-gray) !important;*/
-  /*stroke-width: 3px;*/
-/*}*/
+.pie-slice:hover {
+  fill: #EEEEEE !important;
+  transition: 200ms;
+  transition-timing-function: ease-in-out;
+  -webkit-transition: 200ms;
+  -webkit-transition-timing-function: ease-in-out;
+}
 
 .pie-slice-hover {
   border: 3px solid var(--dark-gray);

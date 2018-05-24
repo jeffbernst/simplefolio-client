@@ -24,10 +24,10 @@ export function LandingPageTopSection () {
     <div className="background-top">
       <div className="container">
         <nav>
-          <div className="site-logo">Simplefolio</div>
+          <div className="site-logo fade-in-out">Simplefolio</div>
           <div className="nav-buttons">
-            <button className="login">Login</button>
-            <button className="signup">Sign Up</button>
+            <button className="login fade-in-out">Login</button>
+            <button className="signup fade-in-out">Sign Up</button>
           </div>
         </nav>
         <div className="landing-message">
@@ -38,7 +38,7 @@ export function LandingPageTopSection () {
               who don’t want to get bogged down with
               complicated features.
             </div>
-            <button className="get-started">Get Started</button>
+            <button className="get-started fade-in-out">Get Started</button>
           </div>
           </div>
       </div>
