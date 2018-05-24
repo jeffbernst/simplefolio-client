@@ -27,7 +27,13 @@ const samplePortfolio = [
 export class LandingPageMiddleSection extends React.Component {
   state = {
     portfolio: samplePortfolio,
-    cryptoPriceData: {}
+    cryptoPriceData: undefined
+  }
+
+  async getPriceData () {
+    const response = await fetch('https://api.coinmarketcap.com/v2/ticker/')
+    const data = await response.json()
+    return data.data
   }
 
   async componentDidMount () {
@@ -37,13 +43,35 @@ export class LandingPageMiddleSection extends React.Component {
     })
   }
 
-  async getPriceData () {
-    const response = await fetch('https://api.coinmarketcap.com/v2/ticker/')
-    return response.json()
-  }
-
   render () {
-    console.log(this.state.cryptoPriceData)
+    let portfolioList
+
+    if (this.state.cryptoPriceData) {
+      portfolioList = samplePortfolio.map((item, index) => {
+        const itemData = this.state.cryptoPriceData[item.id]
+        const {name, symbol} = itemData
+        const price = itemData.quotes.USD.price.toFixed(2)
+        const priceWithCommas = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        const percentChange = itemData.quotes.USD.percent_change_24h
+        const {quantity} = item
+        const balance = quantity * price
+        const colorIndex = index <= colors.length ? index : index % colors.length
+
+        return (
+          <PortfolioEntry
+            name={name}
+            balance={balance}
+            quantity={quantity}
+            symbol={symbol}
+            price={priceWithCommas}
+            percentChange={percentChange}
+            color={colors[colorIndex]}
+            key={index}
+          />
+        )
+      })
+    }
+
     return (
       <div className="background-middle">
         <div className="container">
@@ -53,19 +81,10 @@ export class LandingPageMiddleSection extends React.Component {
           </div>
           <div className="portfolio-title">Portfolio</div>
           <div className="portfolio-sample">
-            <div className="portfolio-holdings">
-              <PortfolioEntry
-                name='Bitcoin'
-                balance='250'
-                percentage='25'
-                quantity='0.1'
-                symbol='BTC'
-                price='8000'
-                percentChange='3'
-                // color={colors.purple}
-              />
+            <div className="portfolio-list">
+              {portfolioList}
             </div>
-            <div className="purple-pie-chart">
+            <div className="pie-chart">
               <PieChart/>
             </div>
           </div>

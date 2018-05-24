@@ -1,6 +1,5 @@
-.pie-chart {
-  border: 1px solid var(--dark-gray);
-  border-radius: 50%;
+.rv-xy-plot__inner {
+  overflow: visible !important;
 }
 
 .pie-slice:hover {
