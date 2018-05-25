@@ -12,6 +12,10 @@ nav {
   cursor: pointer;
 }
 
+nav a {
+  text-decoration: none;
+}
+
 .site-logo:hover {
   color: var(--pink);
 }
