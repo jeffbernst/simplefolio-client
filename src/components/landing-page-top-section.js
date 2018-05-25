@@ -3,7 +3,7 @@ import { LandingNav } from './landing-nav'
 import './landing-page-top-section.css'
 
 export function LandingPageTopSection () {
-  const yellowPieChart =
+  const pieChartSvg =
     <svg width='251' height='250' viewBox='0 0 251 250' xmlns='http://www.w3.org/2000/svg'>
       {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
       <g id='Landing-Page' fill='none' fillRule='evenodd'>
@@ -26,7 +26,7 @@ export function LandingPageTopSection () {
       <div className="container">
         <LandingNav/>
         <div className="landing-message">
-          {yellowPieChart}
+          {pieChartSvg}
           <div className="landing-copy-and-button">
             <div className="landing-copy-top">
               A simple cryptocurrency portfolio for those
