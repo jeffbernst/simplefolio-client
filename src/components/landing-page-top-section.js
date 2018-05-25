@@ -1,4 +1,5 @@
 import React from 'react'
+import { LandingNav } from './landing-nav'
 import './landing-page-top-section.css'
 
 export function LandingPageTopSection () {
@@ -8,13 +9,13 @@ export function LandingPageTopSection () {
       <g id='Landing-Page' fill='none' fillRule='evenodd'>
         <g id='preview' transform='translate(-562 -426)'>
           <g id='pie-chart' transform='translate(563 426)'>
-            <circle id='Oval' fill='#F7D633' cx='125' cy='125' r='125' />
+            <circle id='Oval' fill='#F7D633' cx='125' cy='125' r='125'/>
             <path d='M126.774623,117.369886 L96.473374,243.834127' id='Line-4' stroke='#A084D1'
-                  strokeWidth='3' strokeLinecap='square' />
+                  strokeWidth='3' strokeLinecap='square'/>
             <path d='M124.26746,117.349498 L1.14860984,122.617057' id='Line-5' stroke='#A084D1'
-                  strokeWidth='3' strokeLinecap='square' />
+                  strokeWidth='3' strokeLinecap='square'/>
             <path d='M232.128568,190.323276 L28.7437914,47.9710388' id='Line-6' stroke='#A084D1'
-                  strokeWidth='3' strokeLinecap='square' />
+                  strokeWidth='3' strokeLinecap='square'/>
           </g>
         </g>
       </g>
@@ -23,13 +24,7 @@ export function LandingPageTopSection () {
   return (
     <div className="background-top">
       <div className="container">
-        <nav>
-          <div className="site-logo fade-in-out">Simplefolio</div>
-          <div className="nav-buttons">
-            <button className="login fade-in-out">Login</button>
-            <button className="signup fade-in-out">Sign Up</button>
-          </div>
-        </nav>
+        <LandingNav/>
         <div className="landing-message">
           {yellowPieChart}
           <div className="landing-copy-and-button">
@@ -40,7 +35,7 @@ export function LandingPageTopSection () {
             </div>
             <button className="get-started fade-in-out">Get Started</button>
           </div>
-          </div>
+        </div>
       </div>
     </div>
   )

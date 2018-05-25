@@ -1,5 +1,4 @@
 import React from 'react'
-import './watchlist-widget.css'
 
 export function WatchlistWidget (props) {
   return (
