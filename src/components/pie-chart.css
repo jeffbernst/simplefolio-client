@@ -1,0 +1,26 @@
+.rv-xy-plot__inner {
+  overflow: visible !important;
+}
+
+/*.pie-slice:hover {*/
+  /*fill: #EEEEEE !important;*/
+  /*transition: 200ms;*/
+  /*transition-timing-function: ease-in-out;*/
+  /*-webkit-transition: 200ms;*/
+  /*-webkit-transition-timing-function: ease-in-out;*/
+/*}*/
+
+/*.pie-slice-hover {*/
+  /*border: 3px solid var(--dark-gray);*/
+  /*border-radius: 8px;*/
+  /*box-sizing: border-box;*/
+  /*padding: 5px 8px;*/
+  /*overflow: hidden;*/
+/*}*/
+
+/*.pie-slice-hover-text {*/
+  /*font-size: 18px;*/
+  /*font-weight: bold;*/
+  /*font-family: "Avenir Next", sans-serif;*/
+  /*color: var(--dark-gray);*/
+/*}*/

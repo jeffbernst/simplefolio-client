@@ -1,14 +1,9 @@
-.background {
+.background-top {
   background-color: var(--purple);
-  height: 700px;
   width: 100%;
   padding-top: 50px;
 }
 
-.container {
-  width: 960px;
-  margin: 0 auto;
-}
 
 nav {
   display: flex;
@@ -20,6 +15,11 @@ nav {
   font-size: 48px;
   font-weight: bold;
   color: white;
+  cursor: pointer;
+}
+
+.site-logo:hover {
+  color: var(--pink);
 }
 
 nav button {
@@ -39,7 +39,9 @@ nav button:hover {
 }
 
 .landing-message {
-  margin: 160px auto 0 auto;
+  margin: 0 auto;
+  padding-top: 160px;
+  padding-bottom: 160px;
   width: 800px;
   height: 250px;
   display: flex;
@@ -53,7 +55,7 @@ nav button:hover {
   text-align: center;
 }
 
-.landing-copy {
+.landing-copy-top {
   font-size: 24px;
   font-weight: bold;
   color: white;

@@ -1,0 +1,30 @@
+.background-middle {
+  background-color: #EEEEEE;
+  width: 100%;
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+
+.landing-copy {
+  width: 700px;
+  margin: 0 auto 50px auto;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.portfolio-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.portfolio-sample {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pie-chart {
+  margin-top: -15px;
+}
+

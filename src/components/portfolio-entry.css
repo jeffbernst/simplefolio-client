@@ -1,0 +1,22 @@
+.portfolio-entry {
+  border: 3px solid var(--dark-gray);
+  border-radius: 8px;
+  width: 430px;
+  box-sizing: border-box;
+  padding: 8px;
+  margin-bottom: 15px;
+}
+
+.portfolio-entry-top-line {
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+.portfolio-entry-bottom-line {
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
