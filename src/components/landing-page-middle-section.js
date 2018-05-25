@@ -1,4 +1,5 @@
 import React from 'react'
+import fetch from 'isomorphic-fetch'
 import './landing-page-middle-section.css'
 import { PortfolioEntry } from './portfolio-entry'
 import { PieChart } from './pie-chart'
