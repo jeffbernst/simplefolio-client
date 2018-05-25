@@ -5,12 +5,54 @@
 }
 
 .login-form {
-  text-align: center;
   margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .login-message {
   font-size: 24px;
   font-weight: bold;
   color: white;
+  margin-bottom: 30px;
+}
+
+.login-field {
+  width: 365px;
+}
+
+.login-field input {
+  width: 100%;
+  height: 35px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 10px;
+  font-size: 16px;
+  padding-left: 8px;
+  box-sizing: border-box;
+}
+
+.submit-button-container {
+  width: 365px;
+  height: 100%;
+}
+
+.login-submit-button {
+  width: 100%;
+  height: 35px;
+  border: none;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: var(--pink);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-submit-button:hover {
+  background-color: white;
+  color: var(--pink);
 }
