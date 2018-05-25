@@ -16,7 +16,7 @@ export function Login () {
             <input type="password" className="login-password" id="login-password" placeholder="password" required />
           </div>
           <div className="submit-button-container">
-            <button type="submit" className='login-submit-button fade-in-out'>Let's go!</button>
+            <button type="submit" className='login-signup-submit-button fade-in-out'>Let's go!</button>
           </div>
         </form>
       </div>
