@@ -1,10 +1,11 @@
-.login-background {
+.login-signup-background {
   width: 100%;
   height: 100vh;
   background-color: var(--purple);
 }
 
-.login-form {
+.login-form,
+.signup-form {
   margin-top: 100px;
   display: flex;
   flex-direction: column;
@@ -12,18 +13,18 @@
   justify-content: center;
 }
 
-.login-message {
+.login-signup-message {
   font-size: 24px;
   font-weight: bold;
   color: white;
   margin-bottom: 30px;
 }
 
-.login-field {
+.login-signup-field {
   width: 365px;
 }
 
-.login-field input {
+.login-signup-field input {
   width: 100%;
   height: 35px;
   border-radius: 8px;
@@ -39,7 +40,7 @@
   height: 100%;
 }
 
-.login-submit-button {
+.login-signup-submit-button {
   width: 100%;
   height: 35px;
   border: none;
@@ -52,7 +53,7 @@
   cursor: pointer;
 }
 
-.login-submit-button:hover {
+.login-signup-submit-button:hover {
   background-color: white;
   color: var(--pink);
 }
