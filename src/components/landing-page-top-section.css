@@ -1,41 +1,6 @@
 .background-top {
   background-color: var(--purple);
   width: 100%;
-  padding-top: 50px;
-}
-
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.site-logo {
-  font-size: 48px;
-  font-weight: bold;
-  color: white;
-  cursor: pointer;
-}
-
-.site-logo:hover {
-  color: var(--pink);
-}
-
-nav button {
-  border: 3px solid white;
-  background: none;
-  padding: 5px 8px;
-  border-radius: 8px;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  margin-left: 10px;
-}
-
-nav button:hover {
-  background-color: white;
-  color: var(--purple);
 }
 
 .landing-message {
