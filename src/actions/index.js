@@ -26,7 +26,6 @@ export const getPriceData = () => async dispatch => {
     // fetch price data as json from api
     const response = await fetch('https://api.coinmarketcap.com/v2/ticker/')
     const data = await response.json()
-
     dispatch(getPriceDataSuccess(data.data))
 
   } catch (err) {
