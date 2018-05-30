@@ -9,9 +9,9 @@ const getPriceDataRequest = () => ({
   type: GET_PRICE_DATA_REQUEST
 })
 
-const getPriceDataSuccess = posts => ({
+const getPriceDataSuccess = priceData => ({
   type: GET_PRICE_DATA_SUCCES,
-  payload: posts
+  payload: priceData
 })
 
 const getPriceDataError = error => ({
@@ -23,7 +23,6 @@ export const getPriceData = () => async dispatch => {
   dispatch(getPriceDataRequest())
 
   try {
-    // fetch price data as json from api
     const response = await fetch('https://api.coinmarketcap.com/v2/ticker/')
     const data = await response.json()
     dispatch(getPriceDataSuccess(data.data))

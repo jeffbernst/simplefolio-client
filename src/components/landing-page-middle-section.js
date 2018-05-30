@@ -1,5 +1,4 @@
 import React from 'react'
-import fetch from 'isomorphic-fetch'
 import './landing-page-middle-section.css'
 import { PortfolioEntry } from './portfolio-entry'
 import { PieChart } from './pie-chart'
@@ -9,23 +8,10 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 const samplePortfolio = [
-  {
-    id: 1,
-    quantity: 0.1
-  },
-  {
-    id: 1027,
-    quantity: 1
-  }
-  ,
-  {
-    id: 1230,
-    quantity: 150
-  },
-  {
-    id: 1697,
-    quantity: 500
-  }
+  {id: 1, quantity: 0.1},
+  {id: 1027, quantity: 1},
+  {id: 1230, quantity: 150},
+  {id: 1697, quantity: 500}
 ]
 
 class LandingPageMiddleSection extends React.Component {
