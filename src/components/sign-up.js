@@ -3,7 +3,7 @@ import { LandingNav } from './landing-nav'
 import './sign-up.css'
 import { Field, reduxForm, focus } from 'redux-form'
 import Input from './input'
-// import { registerUser } from '../actions/users'
+import { registerUser } from '../actions/users'
 // import { login } from '../actions/auth'
 import { required, nonEmpty, matches, length, isTrimmed } from '../validators'
 
