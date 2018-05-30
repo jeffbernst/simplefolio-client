@@ -4,6 +4,9 @@ import './landing-page-middle-section.css'
 import { PortfolioEntry } from './portfolio-entry'
 import { PieChart } from './pie-chart'
 import { colors, darkGray } from '../colors'
+import { getPriceData } from '../actions'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 const samplePortfolio = [
   {
@@ -25,32 +28,22 @@ const samplePortfolio = [
   }
 ]
 
-export class LandingPageMiddleSection extends React.Component {
+class LandingPageMiddleSection extends React.Component {
   state = {
-    portfolio: samplePortfolio,
-    cryptoPriceData: undefined
+    portfolio: samplePortfolio
   }
 
-  async getPriceData () {
-    const response = await fetch('https://api.coinmarketcap.com/v2/ticker/')
-    const data = await response.json()
-    return data.data
-  }
-
-  async componentDidMount () {
-    const cryptoPriceData = await this.getPriceData()
-    this.setState({
-      cryptoPriceData
-    })
+  componentDidMount () {
+    this.props.getPriceData()
   }
 
   render () {
     let portfolioList
     let pieChartData = []
-    if (this.state.cryptoPriceData)
+    if (this.props.cryptoPriceData)
       portfolioList = samplePortfolio.map((item, index) => {
         // iterate through portfolio holdings and match up with current price data
-        const itemData = this.state.cryptoPriceData[item.id]
+        const itemData = this.props.cryptoPriceData[item.id]
         const {name, symbol} = itemData
         const price = itemData.quotes.USD.price.toFixed(2)
         const priceWithCommas = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -100,3 +93,16 @@ export class LandingPageMiddleSection extends React.Component {
     )
   }
 }
+
+function mapStateToProps (state) {
+  return {
+    loading: state.loading,
+    cryptoPriceData: state.cryptoPriceData
+  }
+}
+
+const mapDispatchToProps = {
+  getPriceData
+}
+
+export const ConnectedLandingPageMiddleSection = withRouter(connect(mapStateToProps, mapDispatchToProps)(LandingPageMiddleSection))

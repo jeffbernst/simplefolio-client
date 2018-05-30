@@ -5,7 +5,8 @@ import {
 } from './actions/types'
 
 const initialState = {
-  loading: false
+  loading: false,
+  cryptoPriceData: undefined
 }
 
 export const reducer = (state = initialState, action) => {
