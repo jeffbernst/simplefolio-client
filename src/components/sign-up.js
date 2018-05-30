@@ -31,16 +31,16 @@ class SignUp extends React.Component {
                 )}>
             <div className="login-signup-message">Create an account to get started!</div>
             <div className="login-signup-field">
-              <Field component={Input} type="text" name="username" className="signup-username" placeholder="username"
+              <Field component={Input} type="text" name="username" placeholder="username"
                      validate={[required, nonEmpty, isTrimmed]}/>
             </div>
             <div className="login-signup-field">
-              <Field component={Input} type="password" name="password" className="signup-password"
+              <Field component={Input} type="password" name="password"
                      placeholder="password" validate={[required, passwordLength, isTrimmed]}/>
             </div>
             <div className="login-signup-field">
               <Field component={Input} type="password" name="passwordConfirmation"
-                     className="signup-password-confirmation" placeholder="confirm password"
+                     placeholder="confirm password"
                      validate={[required, nonEmpty, matchesPassword]}/>
             </div>
             <div className="submit-button-container">
