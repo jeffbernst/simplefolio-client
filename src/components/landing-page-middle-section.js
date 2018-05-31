@@ -15,10 +15,6 @@ const samplePortfolio = [
 ]
 
 class LandingPageMiddleSection extends React.Component {
-  state = {
-    portfolio: samplePortfolio
-  }
-
   componentDidMount () {
     this.props.getPriceData()
   }
@@ -82,8 +78,8 @@ class LandingPageMiddleSection extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    loading: state.loading,
-    cryptoPriceData: state.cryptoPriceData
+    loading: state.index.loading,
+    cryptoPriceData: state.index.cryptoPriceData
   }
 }
 
