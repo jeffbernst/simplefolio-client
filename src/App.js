@@ -4,7 +4,7 @@ import './App.css'
 
 import { LandingPage } from './components/landing-page'
 import { Login } from './components/login'
-import SignUp from './components/sign-up'
+import SignUp from './components/sign-up-page'
 
 class App extends Component {
   render () {
