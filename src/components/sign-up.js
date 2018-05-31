@@ -3,21 +3,24 @@ import { LandingNav } from './landing-nav'
 import './sign-up.css'
 import { Field, reduxForm, focus } from 'redux-form'
 import Input from './input'
-// import { registerUser } from '../actions/users'
-// import { login } from '../actions/auth'
+import { registerUser } from '../actions/users'
+import { login } from '../actions/auth'
 import { required, nonEmpty, matches, length, isTrimmed } from '../validators'
 
 const passwordLength = length({min: 10, max: 72})
 const matchesPassword = matches('password')
 
 class SignUp extends React.Component {
+  componentDidMount() {
+    console.log()
+  }
+
   onSubmit (values) {
-    // const {username, password, passwordConfirmation} = values
-    // const user = {username, password, firstName, lastName}
-    // return this.props
-    //   .dispatch(registerUser(user))
-    //   .then(() => this.props.dispatch(login(username, password)))
-    console.log(values)
+    const {username, password} = values
+    const user = {username, password}
+    return this.props
+      .dispatch(registerUser(user))
+      .then(() => this.props.dispatch(login(username, password)))
   }
 
   render () {
