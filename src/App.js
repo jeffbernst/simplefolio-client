@@ -4,8 +4,8 @@ import './App.css'
 import { withRouter } from 'react-router-dom'
 import { LandingPage } from './components/landing-page'
 import { PortfolioPage } from './components/portfolio-page'
-import { LoginPage } from './components/login-page'
-import SignUp from './components/sign-up-page'
+import ConnectedLoginPage from './components/login-page'
+import ConnectedSignUpPage from './components/sign-up-page'
 import { connect } from 'react-redux'
 
 class App extends Component {
@@ -15,8 +15,8 @@ class App extends Component {
     return (
       <div>
         <Route exact path='/' component={rootComponent}/>
-        <Route exact path='/signup' component={SignUp}/>
-        <Route exact path='/login' component={LoginPage}/>
+        <Route exact path='/signup' component={ConnectedSignUpPage}/>
+        <Route exact path='/login' component={ConnectedLoginPage}/>
       </div>
     )
   }
