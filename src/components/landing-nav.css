@@ -1,18 +1,18 @@
-.landing-nav nav {
+.landing-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 40px;
 }
 
-.site-logo {
+.landing-nav .site-logo {
   font-size: 48px;
   font-weight: bold;
   color: white;
   cursor: pointer;
 }
 
-.landing-nav nav a {
+.landing-nav a {
   text-decoration: none;
 }
 
@@ -20,7 +20,7 @@
   color: var(--pink);
 }
 
-.landing-nav nav button {
+.landing-nav button {
   border: 3px solid white;
   background: none;
   padding: 5px 8px;
@@ -31,7 +31,7 @@
   margin-left: 10px;
 }
 
-.landing-nav nav button:hover {
+.landing-nav button:hover {
   background-color: white;
   color: var(--purple);
 }

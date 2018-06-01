@@ -1,21 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './user-nav.css'
+import { clearAuth } from '../actions/auth'
+import { clearAuthToken } from '../local-storage'
 
-export function UserNav () {
-  return (
-    <nav>
-      <Link to={'/'}>
-        <div className="site-logo fade-in-out">Simplefol.io</div>
-      </Link>
-      <div className="nav-buttons">
-        <Link to={'/login'}>
-          <button className="login fade-in-out">Login</button>
+export class UserNav extends React.Component {
+  logOut () {
+    this.state.dispatch(clearAuth())
+    clearAuthToken()
+  }
+
+  render () {
+    return (
+      <nav className='user-nav container'>
+        <Link to={'/'}>
+          <div className="site-logo fade-in-out">Simplefol.io</div>
         </Link>
-        <Link to={'/signup'}>
-          <button className="signup fade-in-out">Sign Up</button>
-        </Link>
-      </div>
-    </nav>
-  )
+        <div className="nav-buttons">
+          <button className="logout fade-in-out" onClick={() => this.logOut()}>Logout</button>
+        </div>
+      </nav>
+    )
+  }
 }
