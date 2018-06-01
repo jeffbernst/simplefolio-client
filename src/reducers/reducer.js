@@ -1,12 +1,16 @@
 import {
   GET_PRICE_DATA_REQUEST,
   GET_PRICE_DATA_SUCCES,
-  GET_PRICE_DATA_ERROR
+  GET_PRICE_DATA_ERROR,
+  FORMAT_PORTFOLIO
 } from '../actions/types'
 
 const initialState = {
   loading: false,
-  cryptoPriceData: undefined
+  cryptoPriceData: undefined,
+  portfolioData: undefined,
+  formattedPortfolioList: undefined,
+  pieChartData: undefined
 }
 
 export const reducer = (state = initialState, action) => {
@@ -27,6 +31,12 @@ export const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload
+      }
+    case FORMAT_PORTFOLIO:
+      return {
+        ...state,
+        formattedPortfolioList: action.portfolioList,
+        pieChartData: action.pieChartData
       }
     default:
       return state
