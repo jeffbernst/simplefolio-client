@@ -25,13 +25,13 @@
   background: none;
   padding: 5px 8px;
   border-radius: 8px;
-  color: white;
+  color: var(--dark-gray);
   font-size: 18px;
   font-weight: bold;
   margin-left: 10px;
 }
 
 .user-nav button:hover {
-  background-color: white;
-  color: var(--dark-gray);
+  background-color: var(--dark-gray);
+  color: white;
 }
