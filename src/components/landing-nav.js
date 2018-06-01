@@ -4,7 +4,7 @@ import './landing-nav.css'
 
 export function LandingNav () {
   return (
-    <nav>
+    <nav className='landing-nav'>
       <Link to={'/'}>
         <div className="site-logo fade-in-out">Simplefol.io</div>
       </Link>

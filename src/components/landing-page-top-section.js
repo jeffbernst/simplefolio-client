@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { LandingNav } from './landing-nav'
 import './landing-page-top-section.css'
 
@@ -33,7 +34,7 @@ export function LandingPageTopSection () {
               who don’t want to get bogged down with
               complicated features.
             </div>
-            <button className="get-started fade-in-out">Get Started</button>
+            <Link to={'/signup'}><button className="get-started fade-in-out">Get Started</button></Link>
           </div>
         </div>
       </div>

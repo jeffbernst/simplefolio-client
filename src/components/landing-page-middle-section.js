@@ -1,56 +1,31 @@
 import React from 'react'
-import fetch from 'isomorphic-fetch'
 import './landing-page-middle-section.css'
 import { PortfolioEntry } from './portfolio-entry'
 import { PieChart } from './pie-chart'
 import { colors, darkGray } from '../colors'
+import { getPriceData } from '../actions'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 const samplePortfolio = [
-  {
-    id: 1,
-    quantity: 0.1
-  },
-  {
-    id: 1027,
-    quantity: 1
-  }
-  ,
-  {
-    id: 1230,
-    quantity: 150
-  },
-  {
-    id: 1697,
-    quantity: 500
-  }
+  {id: 1, quantity: 0.1},
+  {id: 1027, quantity: 1},
+  {id: 1230, quantity: 150},
+  {id: 1697, quantity: 500}
 ]
 
-export class LandingPageMiddleSection extends React.Component {
-  state = {
-    portfolio: samplePortfolio,
-    cryptoPriceData: undefined
-  }
-
-  async getPriceData () {
-    const response = await fetch('https://api.coinmarketcap.com/v2/ticker/')
-    const data = await response.json()
-    return data.data
-  }
-
-  async componentDidMount () {
-    const cryptoPriceData = await this.getPriceData()
-    this.setState({
-      cryptoPriceData
-    })
+class LandingPageMiddleSection extends React.Component {
+  componentDidMount () {
+    this.props.getPriceData()
   }
 
   render () {
     let portfolioList
     let pieChartData = []
-    if (this.state.cryptoPriceData)
+    if (this.props.cryptoPriceData)
       portfolioList = samplePortfolio.map((item, index) => {
         // iterate through portfolio holdings and match up with current price data
-        const itemData = this.state.cryptoPriceData[item.id]
+        const itemData = this.props.cryptoPriceData[item.id]
         const {name, symbol} = itemData
         const price = itemData.quotes.USD.price.toFixed(2)
         const priceWithCommas = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -100,3 +75,16 @@ export class LandingPageMiddleSection extends React.Component {
     )
   }
 }
+
+function mapStateToProps (state) {
+  return {
+    loading: state.index.loading,
+    cryptoPriceData: state.index.cryptoPriceData
+  }
+}
+
+const mapDispatchToProps = {
+  getPriceData
+}
+
+export const ConnectedLandingPageMiddleSection = withRouter(connect(mapStateToProps, mapDispatchToProps)(LandingPageMiddleSection))

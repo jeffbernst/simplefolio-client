@@ -1,27 +1,27 @@
-.landing-nav {
+.user-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 40px;
 }
 
-.landing-nav .site-logo {
+.user-nav .site-logo {
   font-size: 48px;
   font-weight: bold;
-  color: white;
+  color: var(--dark-gray);
   cursor: pointer;
 }
 
-.landing-nav a {
+.user-nav a {
   text-decoration: none;
 }
 
-.landing-nav .site-logo:hover {
+.user-nav .site-logo:hover {
   color: var(--pink);
 }
 
-.landing-nav button {
-  border: 3px solid white;
+.user-nav button {
+  border: 3px solid var(--dark-gray);
   background: none;
   padding: 5px 8px;
   border-radius: 8px;
@@ -31,7 +31,7 @@
   margin-left: 10px;
 }
 
-.landing-nav button:hover {
+.user-nav button:hover {
   background-color: white;
-  color: var(--purple);
+  color: var(--dark-gray);
 }
