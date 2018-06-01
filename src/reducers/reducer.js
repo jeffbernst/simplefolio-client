@@ -2,7 +2,7 @@ import {
   GET_PRICE_DATA_REQUEST,
   GET_PRICE_DATA_SUCCES,
   GET_PRICE_DATA_ERROR
-} from './actions/types'
+} from '../actions/types'
 
 const initialState = {
   loading: false,
