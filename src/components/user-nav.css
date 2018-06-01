@@ -1,4 +1,4 @@
-.landing-nav nav {
+nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,15 +12,15 @@
   cursor: pointer;
 }
 
-.landing-nav nav a {
+nav a {
   text-decoration: none;
 }
 
-.landing-nav .site-logo:hover {
+.site-logo:hover {
   color: var(--pink);
 }
 
-.landing-nav nav button {
+nav button {
   border: 3px solid white;
   background: none;
   padding: 5px 8px;
@@ -31,7 +31,7 @@
   margin-left: 10px;
 }
 
-.landing-nav nav button:hover {
+nav button:hover {
   background-color: white;
   color: var(--purple);
 }

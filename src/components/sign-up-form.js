@@ -20,31 +20,31 @@ class SignUpForm extends React.Component {
 
   render () {
     return (
-          <form className="signup-form"
-                onSubmit={this.props.handleSubmit(values =>
-                  this.onSubmit(values)
-                )}>
-            <div className="login-signup-message">Create an account to get started!</div>
-            <div className="login-signup-field">
-              <Field component={Input} type="text" name="username" placeholder="username"
-                     validate={[required, nonEmpty, isTrimmed]}/>
-            </div>
-            <div className="login-signup-field">
-              <Field component={Input} type="password" name="password"
-                     placeholder="password" validate={[required, passwordLength, isTrimmed]}/>
-            </div>
-            <div className="login-signup-field">
-              <Field component={Input} type="password" name="passwordConfirmation"
-                     placeholder="confirm password"
-                     validate={[required, nonEmpty, matchesPassword]}/>
-            </div>
-            <div className="submit-button-container">
-              <button type="submit" className='login-signup-submit-button fade-in-out'
-                      disabled={this.props.pristine || this.props.submitting}>
-                Let's go!
-              </button>
-            </div>
-          </form>
+      <form className="signup-form"
+            onSubmit={this.props.handleSubmit(values =>
+              this.onSubmit(values)
+            )}>
+        <div className="login-signup-message">Create an account to get started!</div>
+        <div className="login-signup-field">
+          <Field component={Input} type="text" name="username" placeholder="username"
+                 validate={[required, nonEmpty, isTrimmed]}/>
+        </div>
+        <div className="login-signup-field">
+          <Field component={Input} type="password" name="password"
+                 placeholder="password" validate={[required, passwordLength, isTrimmed]}/>
+        </div>
+        <div className="login-signup-field">
+          <Field component={Input} type="password" name="passwordConfirmation"
+                 placeholder="confirm password"
+                 validate={[required, nonEmpty, matchesPassword]}/>
+        </div>
+        <div className="submit-button-container">
+          <button type="submit" className='login-signup-submit-button fade-in-out'
+                  disabled={this.props.pristine || this.props.submitting}>
+            Let's go!
+          </button>
+        </div>
+      </form>
     )
   }
 }

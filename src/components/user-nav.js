@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './landing-nav.css'
+import './user-nav.css'
 
-export function LandingNav () {
+export function UserNav () {
   return (
-    <nav className='landing-nav'>
+    <nav>
       <Link to={'/'}>
         <div className="site-logo fade-in-out">Simplefol.io</div>
       </Link>
