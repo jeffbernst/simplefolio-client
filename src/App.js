@@ -3,14 +3,14 @@ import { Route } from 'react-router-dom'
 import './App.css'
 import { withRouter } from 'react-router-dom'
 import { LandingPage } from './components/landing-page'
-import { PortfolioPage } from './components/portfolio-page'
+import { ConnectedPortfolioPage } from './components/portfolio-page'
 import ConnectedLoginPage from './components/login-page'
 import ConnectedSignUpPage from './components/sign-up-page'
 import { connect } from 'react-redux'
 
 class App extends Component {
   render () {
-    const rootComponent = this.props.loggedIn ? PortfolioPage : LandingPage
+    const rootComponent = this.props.loggedIn ? ConnectedPortfolioPage : LandingPage
 
     return (
       <div>
