@@ -1,10 +1,10 @@
 import React from 'react'
-import {UserNav} from './user-nav'
+import ConnectedUserNav from './user-nav'
 
 export function PortfolioPage () {
   return (
     <div>
-      <UserNav/>
+      <ConnectedUserNav/>
       portfolio
     </div>
   )

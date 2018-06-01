@@ -4,7 +4,7 @@ import './App.css'
 import { withRouter } from 'react-router-dom'
 import { LandingPage } from './components/landing-page'
 import { PortfolioPage } from './components/portfolio-page'
-import { Login } from './components/login'
+import { LoginPage } from './components/login-page'
 import SignUp from './components/sign-up-page'
 import { connect } from 'react-redux'
 
@@ -16,7 +16,7 @@ class App extends Component {
       <div>
         <Route exact path='/' component={rootComponent}/>
         <Route exact path='/signup' component={SignUp}/>
-        <Route exact path='/login' component={Login}/>
+        <Route exact path='/login' component={LoginPage}/>
       </div>
     )
   }

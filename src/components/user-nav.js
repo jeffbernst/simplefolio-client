@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 import './user-nav.css'
 import { clearAuth } from '../actions/auth'
 import { clearAuthToken } from '../local-storage'
+import { connect } from 'react-redux'
 
-export class UserNav extends React.Component {
+class UserNav extends React.Component {
   logOut () {
-    this.state.dispatch(clearAuth())
+    this.props.dispatch(clearAuth())
     clearAuthToken()
   }
 
@@ -23,3 +24,9 @@ export class UserNav extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  loggedIn: state.auth.currentUser !== null
+});
+
+export default connect(mapStateToProps)(UserNav);

@@ -2,7 +2,7 @@ import React from 'react'
 import { LandingNav } from './landing-nav'
 import './login.css'
 
-export function Login () {
+export function LoginPage () {
   return (
     <div className="login-signup-background">
       <div className="container">
