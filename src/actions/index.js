@@ -39,10 +39,10 @@ export const getPriceDataAndFormatPortfolio = portfolio => async dispatch => {
   }
 }
 
-const formatPortfolio = (portfolioList, pieChart) => ({
+const formatPortfolio = (portfolioList, pieChartData) => ({
   type: FORMAT_PORTFOLIO,
   portfolioList,
-  pieChart
+  pieChartData
 })
 
 export const formatPortfolioAndPieChart = (portfolio, priceData) => dispatch => {

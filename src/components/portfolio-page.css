@@ -1,0 +1,25 @@
+.title-and-button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.portfolio-container button {
+  border: 3px solid var(--dark-gray);
+  background: none;
+  padding: 5px 8px;
+  border-radius: 8px;
+  color: var(--dark-gray);
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.portfolio-container button:hover {
+  background-color: var(--dark-gray);
+  color: white;
+}
+
+.portfolio {
+  margin-top: 20px;
+}

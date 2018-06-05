@@ -29,12 +29,12 @@ class LandingPageMiddleSection extends React.Component {
             and enter how much you own to track your balance.
           </div>
           <div className="portfolio-title">Portfolio</div>
-          <div className="portfolio-sample">
+          <div className="portfolio">
             <div className="portfolio-list">
               {this.props.formattedPortfolioList}
             </div>
             <div className="pie-chart">
-              {/*<PieChart pieChartData={this.props.pieChartData}/>*/}
+              {this.props.pieChartData && <PieChart pieChartData={this.props.pieChartData}/>}
             </div>
           </div>
         </div>
