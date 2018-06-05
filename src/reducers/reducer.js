@@ -2,7 +2,7 @@ import {
   GET_PRICE_DATA_REQUEST,
   GET_PRICE_DATA_SUCCES,
   GET_PRICE_DATA_ERROR,
-  FORMAT_PORTFOLIO
+  FORMAT_PORTFOLIO, EDIT_PORTFOLIO_TOGGLE, GET_PORTFOLIO_REQUEST, GET_PORTFOLIO_SUCCESS, GET_PORTFOLIO_ERROR
 } from '../actions/types'
 
 const initialState = {
@@ -10,7 +10,8 @@ const initialState = {
   cryptoPriceData: undefined,
   portfolioData: undefined,
   formattedPortfolioList: undefined,
-  pieChartData: undefined
+  pieChartData: undefined,
+  editPortfolio: false
 }
 
 export const reducer = (state = initialState, action) => {
@@ -37,6 +38,25 @@ export const reducer = (state = initialState, action) => {
         ...state,
         formattedPortfolioList: action.portfolioList,
         pieChartData: action.pieChartData
+      }
+    case EDIT_PORTFOLIO_TOGGLE:
+      return {
+        ...state,
+        editPortfolio: !state.editPortfolio
+      }
+    case GET_PORTFOLIO_REQUEST:
+      return {
+        ...state
+      }
+    case GET_PORTFOLIO_SUCCESS:
+      return {
+        ...state,
+        portfolioData: action.payload
+      }
+    case GET_PORTFOLIO_ERROR:
+      return {
+        ...state,
+        error: action.payload
       }
     default:
       return state

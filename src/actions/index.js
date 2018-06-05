@@ -2,12 +2,18 @@ import {
   GET_PRICE_DATA_REQUEST,
   GET_PRICE_DATA_SUCCES,
   GET_PRICE_DATA_ERROR,
-  FORMAT_PORTFOLIO
+  FORMAT_PORTFOLIO,
+  EDIT_PORTFOLIO_TOGGLE,
+  GET_PORTFOLIO_REQUEST,
+  GET_PORTFOLIO_SUCCESS,
+  GET_PORTFOLIO_ERROR
 } from './types'
 import React from 'react'
 import fetch from 'isomorphic-fetch'
 import { colors, darkGray } from '../colors'
 import { PortfolioEntry } from '../components/portfolio-entry'
+import { API_BASE_URL } from '../config'
+import { normalizeResponseErrors } from './utils'
 
 const getPriceDataRequest = () => ({
   type: GET_PRICE_DATA_REQUEST
@@ -22,6 +28,8 @@ const getPriceDataError = error => ({
   type: GET_PRICE_DATA_ERROR,
   payload: error
 })
+
+// THUNK TO GET PRICE DATA AND THEN FORMAT PORTFOLIO
 
 export const getPriceDataAndFormatPortfolio = portfolio => async dispatch => {
   dispatch(getPriceDataRequest())
@@ -38,6 +46,8 @@ export const getPriceDataAndFormatPortfolio = portfolio => async dispatch => {
     dispatch(getPriceDataError(err.toString()))
   }
 }
+
+// FORMAT PORTFOLIO
 
 const formatPortfolio = (portfolioList, pieChartData) => ({
   type: FORMAT_PORTFOLIO,
@@ -81,4 +91,50 @@ export const formatPortfolioAndPieChart = (portfolio, priceData) => dispatch => 
   })
 
   dispatch(formatPortfolio(portfolioList, pieChartData))
+}
+
+// EDIT PORTFOLIO TOGGLE
+
+export const editPortfolioToggle = () => ({
+  type: EDIT_PORTFOLIO_TOGGLE
+})
+
+// GET PORTFOLIO DATA
+
+const getPortfolioRequest = () => ({
+  type: GET_PORTFOLIO_REQUEST
+})
+
+const getPortfolioSuccess = portfolioData => ({
+  type: GET_PORTFOLIO_SUCCESS,
+  payload: portfolioData
+})
+
+const getPortfolioError = error => ({
+  type: GET_PORTFOLIO_ERROR,
+  payload: error
+})
+
+export const getPortfolio = () => async (dispatch, getState) => {
+  dispatch(getPortfolioRequest())
+
+  try {
+    const authToken = getState().auth.authToken
+    const response = await fetch(`${API_BASE_URL}/users`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
+    })
+    await await normalizeResponseErrors(response)
+    const data = await response.json()
+
+    console.log(data)
+    dispatch(getPortfolioSuccess(data.portfolio))
+    dispatch(getPriceDataAndFormatPortfolio(data.portfolio))
+
+  } catch (err) {
+    console.log('error message: ', err)
+    dispatch(getPortfolioError(err.toString()))
+  }
 }
