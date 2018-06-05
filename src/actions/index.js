@@ -129,7 +129,6 @@ export const getPortfolio = () => async (dispatch, getState) => {
     await await normalizeResponseErrors(response)
     const data = await response.json()
 
-    console.log(data)
     dispatch(getPortfolioSuccess(data.portfolio))
     dispatch(getPriceDataAndFormatPortfolio(data.portfolio))
 

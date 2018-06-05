@@ -2,18 +2,14 @@ import React from 'react'
 import './sign-up.css'
 import { Field, reduxForm, focus } from 'redux-form'
 import Input from './input'
-import { required, nonEmpty } from '../validators'
+import { editPortfolioToggle } from '../actions'
 
 export class EditPortfolio extends React.Component {
   onSubmit (values) {
-    // return this.props.dispatch(login(values.username, values.password))
-    // this will be triggered
-    console.log('edited')
-  }
-
-  editPortfolioToggle () {
-    this.props.editPortfolioToggle()
-    // execute thunk to update portfolio on database
+    if (values.action === 'cancel')
+      this.props.dispatch(editPortfolioToggle())
+    else if (values.action === 'save')
+      console.log('save stuff!')
   }
 
   render () {
@@ -26,33 +22,33 @@ export class EditPortfolio extends React.Component {
       )
     }
 
-    // make array of fields for each currency in portfolio
-    {/*<div className="login-signup-field">*/}
-    {/*<Field component={Input} type="text" id="username" name="username" placeholder="username"*/}
-    {/*validate={[required, nonEmpty]} required/>*/}
-    {/*</div>*/}
+    const {handleSubmit} = this.props
 
     return (
-      <form className="edit-portfolio" onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+      <div>
         <div className="title-and-button">
           <div className="portfolio-title">Portfolio</div>
-          <button className="edit fade-in-out" type='submit' onClick={() => this.editPortfolioToggle()}
-                  disabled={this.props.pristine || this.props.submitting}>Save
+          <button className="edit fade-in-out"
+                  onClick={handleSubmit(values =>
+                    this.onSubmit({ ...values, action: 'cancel' }))}>Cancel
+          </button>
+          <button className="edit fade-in-out"
+                  onClick={handleSubmit(values =>
+                    this.onSubmit({ ...values, action: 'save' }))}>Save
           </button>
         </div>
         <div className="portfolio">
           {error}
           <div className="login-signup-field">
-            <Field component={Input} type="password" id="password" name="password" placeholder="password"
-                   validate={[required, nonEmpty]} required/>
+            <Field component={Input} type="password" id="password" name="password" placeholder="password"/>
           </div>
         </div>
-      </form>
+      </div>
     )
   }
 }
 
 export default reduxForm({
   form: 'edit-portfolio',
-  onSubmitFail: (errors, dispatch) => dispatch(focus('edit-portfolio', 'field'))
+  onSubmitFail: (errors, dispatch) => dispatch(focus('edit-portfolio', 'password'))
 })(EditPortfolio)
