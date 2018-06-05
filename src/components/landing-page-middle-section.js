@@ -18,9 +18,6 @@ class LandingPageMiddleSection extends React.Component {
   }
 
   render () {
-    // if (this.props.cryptoPriceData)
-    //   this.props.formatPortfolioAndPieChart(samplePortfolio, this.props.cryptoPriceData)
-
     return (
       <div className="background-middle">
         <div className="container">

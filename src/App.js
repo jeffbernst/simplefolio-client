@@ -11,6 +11,9 @@ import { connect } from 'react-redux'
 class App extends Component {
   render () {
     const rootComponent = this.props.loggedIn ? ConnectedPortfolioPage : LandingPage
+    // return null if loading to avoid loading
+    // landing page when logged in
+    if (this.props.loading) return null
 
     return (
       <div>
@@ -22,8 +25,8 @@ class App extends Component {
   }
 }
 
-// export default App
 const mapStateToProps = state => ({
+  loading: state.auth.loading,
   loggedIn: state.auth.currentUser !== null
 })
 
