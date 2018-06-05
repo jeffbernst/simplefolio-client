@@ -16,6 +16,8 @@ export class EditPortfolio extends React.Component {
       this.props.editPortfolioToggle()
     else if (values.action === 'save')
       console.log({values})
+    else if (values.action === 'add')
+      console.log({values})
   }
 
   render () {
@@ -43,16 +45,21 @@ export class EditPortfolio extends React.Component {
                     this.onSubmit({...values, action: 'save'}))}>Save
           </button>
         </div>
-        <div className="portfolio">
+        <div className="edit-portfolio">
           {error}
           <Field component={Input} type="dropdown" id="add-crypto" name="add-crypto"/>
-          <Field
-            name="dropDownSelect"
-            label="dropDownSelect"
-            component={Dropdown}
-            currencies={this.props.cryptoListings}
-            className="form-control"
-          />
+          <div className="dropdown">
+            <Field
+              name="dropdown"
+              label="dropdown"
+              component={Dropdown}
+              currencies={this.props.cryptoListings}
+            />
+            <button className="edit fade-in-out"
+                    onClick={handleSubmit(values =>
+                      this.onSubmit({...values, action: 'add'}))}>Add
+            </button>
+          </div>
         </div>
       </div>
     )
