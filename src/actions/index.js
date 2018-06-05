@@ -6,7 +6,10 @@ import {
   EDIT_PORTFOLIO_TOGGLE,
   GET_PORTFOLIO_REQUEST,
   GET_PORTFOLIO_SUCCESS,
-  GET_PORTFOLIO_ERROR
+  GET_PORTFOLIO_ERROR,
+  GET_CRYPTO_LISTINGS_REQUEST,
+  GET_CRYPTO_LISTINGS_SUCCESS,
+  GET_CRYPTO_LISTINGS_ERROR
 } from './types'
 import React from 'react'
 import fetch from 'isomorphic-fetch'
@@ -135,5 +138,40 @@ export const getPortfolio = () => async (dispatch, getState) => {
   } catch (err) {
     console.log('error message: ', err)
     dispatch(getPortfolioError(err.toString()))
+  }
+}
+
+// GET CRYPTO LISTINGS
+
+const getCryptoListingsRequest = () => ({
+  type: GET_CRYPTO_LISTINGS_REQUEST
+})
+
+const getCryptoListingsSuccess = cryptoListings => ({
+  type: GET_CRYPTO_LISTINGS_SUCCESS,
+  payload: cryptoListings
+})
+
+const getCryptoListingsError = error => ({
+  type: GET_CRYPTO_LISTINGS_ERROR,
+  payload: error
+})
+
+// THUNK TO GET PRICE DATA AND THEN FORMAT PORTFOLIO
+
+export const getCryptoListings = () => async dispatch => {
+  dispatch(getCryptoListingsRequest())
+
+  try {
+    const response = await fetch('https://api.coinmarketcap.com/v2/listings/')
+    const data = await response.json()
+
+
+
+    dispatch(getCryptoListingsSuccess(data.data))
+
+  } catch (err) {
+    console.log('error message: ', err)
+    dispatch(getCryptoListingsError(err.toString()))
   }
 }
