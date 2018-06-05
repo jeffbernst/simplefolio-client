@@ -5,6 +5,8 @@ import Input from './input'
 import { Dropdown } from './dropdown'
 import { editPortfolioToggle, getCryptoListings } from '../actions'
 import { connect } from 'react-redux'
+import './edit-portfolio.css'
+import { nonEmpty, required } from '../validators'
 
 export class EditPortfolio extends React.Component {
   componentDidMount () {
@@ -32,28 +34,45 @@ export class EditPortfolio extends React.Component {
 
     const {handleSubmit} = this.props
 
+    let editPortfolioFields
+    // create initial set of fields from state
+    // then allow more to be added from dropdown
+    // without updating portfolio in state or db
+    // might want to use component state to hold current version of portfolio
+
+    // if (this.props.portfolioData)
+    //   this.props.portfolioData.map(crypto => {
+    //     return (
+    //       <div>
+    //
+    //         <Field component={Input} type="text" id="username" name='name' required/>
+    //       </div>
+    //     )
+    //   })
+
     return (
       <div>
         <div className="title-and-button">
           <div className="portfolio-title">Portfolio</div>
           <button className="edit fade-in-out"
-                  onClick={handleSubmit(values =>
-                    this.onSubmit({...values, action: 'cancel'}))}>Cancel
+                  onClick={handleSubmit(values => this.onSubmit({...values, action: 'cancel'}))}>
+            Cancel
           </button>
           <button className="edit fade-in-out"
-                  onClick={handleSubmit(values =>
-                    this.onSubmit({...values, action: 'save'}))}>Save
+                  onClick={handleSubmit(values => this.onSubmit({...values, action: 'save'}))}>
+            Save
           </button>
         </div>
         <div className="edit-portfolio">
           {error}
-          <Field component={Input} type="dropdown" id="add-crypto" name="add-crypto"/>
-          <div className="dropdown">
+          {editPortfolioFields}
+          <div className="dropdown-container">
             <Field
               name="dropdown"
               label="dropdown"
               component={Dropdown}
               currencies={this.props.cryptoListings}
+              className='dropdown'
             />
             <button className="edit fade-in-out"
                     onClick={handleSubmit(values =>

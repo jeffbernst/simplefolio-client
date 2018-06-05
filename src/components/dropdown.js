@@ -18,7 +18,7 @@ export class Dropdown extends React.Component {
     return (
       <div>
         <select {...input}>
-          <option value="">Select</option>
+          <option value="">Pick Cryptocurrency</option>
           {this.props.currencies && cryptoNames.map((name, index) => this.renderSelectOptions(name, index))}
         </select>
       </div>
