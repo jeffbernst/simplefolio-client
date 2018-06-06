@@ -15,11 +15,23 @@ class EditPortfolio extends React.Component {
 
   componentDidMount () {
     this.props.getCryptoListings()
+
+    // initialize values for fields
+    // when editing portfolio
+    let initialValues = {}
+    this.state.portfolio.forEach(crypto => {
+      initialValues[crypto.name] = crypto.quantity
+    })
+    console.log(initialValues)
+    // this.props.initialize({initialValues})
+
+    console.log({'Bitcoin': 0.1, 'Steem': 150})
+    this.props.initialize({'Bitcoin': 0.1, 'Steem': 150})
   }
 
   onSubmit (values) {
     // handle different button actions
-    switch(values.action) {
+    switch (values.action) {
       case 'cancel':
         this.props.editPortfolioToggle()
         break
@@ -58,7 +70,7 @@ class EditPortfolio extends React.Component {
                      type="number"
                      id={crypto.name}
                      name={crypto.name}
-                     validate={[required, nonEmpty]}
+                     validate={[required]}
                      quantity={crypto.quantity}
                      required/>&nbsp;
               {crypto.symbol}
@@ -67,8 +79,6 @@ class EditPortfolio extends React.Component {
           </div>
         )
       })
-
-    console.log('edit portfolio props: ', this.props)
 
     return (
       <div>
@@ -108,19 +118,19 @@ class EditPortfolio extends React.Component {
 function mapStateToProps (state) {
   // initialize values for fields
   // when editing portfolio
-  let initialValues
-  if (state.index.portfolioData) {
-    initialValues = state.index.portfolioData.map(crypto => {
-      let cryptoObj = {}
-      cryptoObj[crypto.name] = crypto.quantity
-      return cryptoObj
-    })
-  }
+  // let initialValues
+  // if (state.index.portfolioData) {
+  //   initialValues = state.index.portfolioData.map(crypto => {
+  //     let cryptoObj = {}
+  //     cryptoObj[crypto.name] = crypto.quantity
+  //     return cryptoObj
+  //   })
+  // }
 
   return {
     portfolioData: state.index.portfolioData,
     cryptoListings: state.index.cryptoListings,
-    initialValues
+    // initialValues
   }
 }
 
@@ -132,7 +142,7 @@ const mapDispatchToProps = {
 EditPortfolio = reduxForm({
   form: 'edit-portfolio',
   enableReinitialize: true,
-  // onSubmitFail: (errors, dispatch) => dispatch(focus('edit-portfolio', 'password'))
+  onSubmitFail: (errors, dispatch) => dispatch(focus('edit-portfolio', 'password'))
 })(EditPortfolio)
 
 EditPortfolio = connect(
