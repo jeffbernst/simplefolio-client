@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { formatPortfolioAndPieChart, getPriceDataAndFormatPortfolio, editPortfolioToggle, getPortfolio } from '../actions'
 import { withRouter } from 'react-router-dom'
 import { ConnectedPortfolio } from './portfolio'
-import ConnectedEditPortfolio from './edit-portfolio'
+import EditPortfolio from './edit-portfolio'
 import './portfolio-page.css'
 
 // const samplePortfolio = [
@@ -21,7 +21,7 @@ class PortfolioPage extends React.Component {
     return (
       <div className='portfolio-container container'>
         <ConnectedUserNav/>
-        {this.props.editPortfolio ? <ConnectedEditPortfolio/> : <ConnectedPortfolio/>}
+        {this.props.editPortfolio ? <EditPortfolio/> : <ConnectedPortfolio/>}
       </div>
     )
   }

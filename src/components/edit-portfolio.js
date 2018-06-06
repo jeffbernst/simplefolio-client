@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import './edit-portfolio.css'
 import { nonEmpty, required } from '../validators'
 
-export class EditPortfolio extends React.Component {
+class EditPortfolio extends React.Component {
   state = {
     portfolio: this.props.portfolioData
   }
@@ -18,6 +18,7 @@ export class EditPortfolio extends React.Component {
   }
 
   onSubmit (values) {
+    // handle different button actions
     switch(values.action) {
       case 'cancel':
         this.props.editPortfolioToggle()
@@ -45,12 +46,8 @@ export class EditPortfolio extends React.Component {
 
     const {handleSubmit} = this.props
 
+    // create fields to edit each crypto in portfolio
     let editPortfolioFields
-    // create initial set of fields from state
-    // then allow more to be added from dropdown
-    // without updating portfolio in state or db
-    // might want to use component state to hold current version of portfolio
-
     if (this.state.portfolio)
       editPortfolioFields = this.state.portfolio.map((crypto, index) => {
         return (
@@ -62,6 +59,7 @@ export class EditPortfolio extends React.Component {
                      id={crypto.name}
                      name={crypto.name}
                      validate={[required, nonEmpty]}
+                     quantity={crypto.quantity}
                      required/>&nbsp;
               {crypto.symbol}
               {/* x to close div goes here*/}
@@ -69,6 +67,8 @@ export class EditPortfolio extends React.Component {
           </div>
         )
       })
+
+    console.log('edit portfolio props: ', this.props)
 
     return (
       <div>
@@ -116,7 +116,6 @@ function mapStateToProps (state) {
       return cryptoObj
     })
   }
-  console.log({initialValues})
 
   return {
     portfolioData: state.index.portfolioData,
@@ -130,12 +129,15 @@ const mapDispatchToProps = {
   getCryptoListings
 }
 
+EditPortfolio = reduxForm({
+  form: 'edit-portfolio',
+  enableReinitialize: true,
+  // onSubmitFail: (errors, dispatch) => dispatch(focus('edit-portfolio', 'password'))
+})(EditPortfolio)
+
 EditPortfolio = connect(
   mapStateToProps,
   mapDispatchToProps
 )(EditPortfolio)
 
-export default reduxForm({
-  form: 'edit-portfolio',
-  onSubmitFail: (errors, dispatch) => dispatch(focus('edit-portfolio', 'password'))
-})(EditPortfolio)
+export default EditPortfolio
