@@ -9,6 +9,10 @@ import './edit-portfolio.css'
 import { nonEmpty, required } from '../validators'
 
 export class EditPortfolio extends React.Component {
+  state = {
+    portfolio: this.props.portfolioData
+  }
+
   componentDidMount () {
     this.props.getCryptoListings()
   }
@@ -40,15 +44,17 @@ export class EditPortfolio extends React.Component {
     // without updating portfolio in state or db
     // might want to use component state to hold current version of portfolio
 
-    // if (this.props.portfolioData)
-    //   this.props.portfolioData.map(crypto => {
-    //     return (
-    //       <div>
-    //
-    //         <Field component={Input} type="text" id="username" name='name' required/>
-    //       </div>
-    //     )
-    //   })
+    if (this.state.portfolio)
+      editPortfolioFields = this.state.portfolio.map((crypto, index) => {
+        return (
+          <div className='edit-portfolio-field' key={index}>
+            {crypto.name}
+            <Field component={Input} type="number" id={crypto.name} name={crypto.name} validate={[required, nonEmpty]} required/>
+            {crypto.symbol}
+            {/* x to close div goes here*/}
+          </div>
+        )
+      })
 
     return (
       <div>
