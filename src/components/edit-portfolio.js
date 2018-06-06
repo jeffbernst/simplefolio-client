@@ -18,12 +18,19 @@ export class EditPortfolio extends React.Component {
   }
 
   onSubmit (values) {
-    if (values.action === 'cancel')
-      this.props.editPortfolioToggle()
-    else if (values.action === 'save')
-      console.log({values})
-    else if (values.action === 'add')
-      console.log({values})
+    switch(values.action) {
+      case 'cancel':
+        this.props.editPortfolioToggle()
+        break
+      case 'save':
+        console.log({values})
+        break
+      case 'add':
+        console.log({values})
+        break
+      default:
+        console.log('error submitting edit portfolio form')
+    }
   }
 
   render () {
@@ -49,9 +56,16 @@ export class EditPortfolio extends React.Component {
         return (
           <div className='edit-portfolio-field' key={index}>
             {crypto.name}
-            <Field component={Input} type="number" id={crypto.name} name={crypto.name} validate={[required, nonEmpty]} required/>
-            {crypto.symbol}
-            {/* x to close div goes here*/}
+            <div className="edit-input-container">
+              <Field component={Input}
+                     type="number"
+                     id={crypto.name}
+                     name={crypto.name}
+                     validate={[required, nonEmpty]}
+                     required/>&nbsp;
+              {crypto.symbol}
+              {/* x to close div goes here*/}
+            </div>
           </div>
         )
       })
@@ -92,9 +106,22 @@ export class EditPortfolio extends React.Component {
 }
 
 function mapStateToProps (state) {
+  // initialize values for fields
+  // when editing portfolio
+  let initialValues
+  if (state.index.portfolioData) {
+    initialValues = state.index.portfolioData.map(crypto => {
+      let cryptoObj = {}
+      cryptoObj[crypto.name] = crypto.quantity
+      return cryptoObj
+    })
+  }
+  console.log({initialValues})
+
   return {
     portfolioData: state.index.portfolioData,
-    cryptoListings: state.index.cryptoListings
+    cryptoListings: state.index.cryptoListings,
+    initialValues
   }
 }
 
