@@ -5,36 +5,45 @@ import { connect } from 'react-redux'
 import './edit-portfolio.css'
 
 class EditPortfolio extends React.Component {
-  // state = {
-  //   portfolio: this.props.portfolioData
-  // }
   constructor (props) {
     super(props)
 
     let holdings = {}
-    this.props.portfolioData.forEach(crypto => holdings[crypto.name] = crypto.quantity)
+    this.props.portfolioData.forEach(crypto => holdings[crypto.name] = crypto)
 
     this.state = {
-      portfolio: this.props.portfolioData,
-      dropdown: 'Pick Cryptocurrency',
-      ...holdings
+      portfolio: holdings,
+      dropdown: 'Pick Cryptocurrency'
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.addCrypto = this.addCrypto.bind(this)
   }
 
   componentDidMount () {
     this.props.getCryptoListings()
+    console.log(this.state)
   }
 
   handleInputChange (event) {
     const value = event.target.value
     const name = event.target.name
 
-    this.setState({
-      [name]: value
-    })
+    if (name === 'dropdown')
+      this.setState({
+        dropdown: value
+      })
+    else
+      this.setState(prevState => ({
+        portfolio: {
+          ...prevState.portfolio,
+          [name]: {
+            ...prevState.portfolio[name],
+            quantity: value
+          }
+        }
+      }))
   }
 
   handleSubmit (event) {
@@ -42,31 +51,47 @@ class EditPortfolio extends React.Component {
     console.log(this.state)
   }
 
-  render () {
-    let editPortfolioFields
-    if (this.state.portfolio)
-      editPortfolioFields = this.state.portfolio.map((crypto, index) => {
-        return (
-          <div className='edit-portfolio-field' key={index}>
-            {crypto.name}
-            <div className="edit-input-container">
-              <input
-                name={crypto.name}
-                type="number"
-                value={this.state[crypto.name]}
-                onChange={this.handleInputChange}/>&nbsp;
-              {crypto.symbol}
-              {/* x to close div goes here*/}
-            </div>
-          </div>
-        )
-      })
+  addCrypto () {
+    const name = this.state.dropdown
+    const dataFromListing = this.props.cryptoListings.find(crypto => crypto.name === name)
 
-    let cryptoNames = []
+    this.setState(prevState => ({
+      portfolio: {
+        ...prevState.portfolio,
+        [name]: {
+          id: dataFromListing.id,
+          name,
+          symbol: dataFromListing.symbol,
+          quantity: 0
+        }
+      }
+    }))
+  }
+
+  // TODO prevent user from picking same crypto multiple times in add menu
+
+  render () {
+    let portfolioKeys = Object.keys(this.state.portfolio)
+    let editPortfolioFields = portfolioKeys.map((key, index) => {
+      return (
+        <div className='edit-portfolio-field' key={index}>
+          {this.state.portfolio[key].name}
+          <div className="edit-input-container">
+            <input
+              name={this.state.portfolio[key].name}
+              type="number"
+              value={this.state.portfolio[key].quantity}
+              onChange={this.handleInputChange}/>&nbsp;
+            {this.state.portfolio[key].symbol}
+            {/* x to close div goes here*/}
+          </div>
+        </div>
+      )
+    })
+
     let cryptoDropdownOptions = []
     if (this.props.cryptoListings) {
-      cryptoNames = this.props.cryptoListings.map(cryptoData => cryptoData.name)
-      cryptoNames.sort()
+      let cryptoNames = this.props.cryptoListings.map(cryptoData => cryptoData.name).sort()
       cryptoDropdownOptions = cryptoNames.map((name, index) => <option key={index} value={name}>{name}</option>)
     }
 
@@ -88,21 +113,8 @@ class EditPortfolio extends React.Component {
               <option value="Pick Cryptocurrency" disabled>Pick Cryptocurrency</option>
               {cryptoDropdownOptions}
             </select>
-            <button className="edit fade-in-out" >Add</button>
+            <button type='button' className="edit fade-in-out" onClick={this.addCrypto}>Add</button>
           </div>
-          {/*<div className="dropdown-container">*/}
-          {/*<Field*/}
-          {/*name="dropdown"*/}
-          {/*label="dropdown"*/}
-          {/*component={Dropdown}*/}
-          {/*currencies={this.props.cryptoListings}*/}
-          {/*className='dropdown'*/}
-          {/*/>*/}
-          {/*<button className="edit fade-in-out"*/}
-          {/*onClick={handleSubmit(values =>*/}
-          {/*this.onSubmit({...values, action: 'add'}))}>Add*/}
-          {/*</button>*/}
-          {/*</div>*/}
         </div>
       </form>
     )
