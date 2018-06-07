@@ -23,7 +23,6 @@ class EditPortfolio extends React.Component {
 
   componentDidMount () {
     this.props.getCryptoListings()
-    console.log(this.state)
   }
 
   handleInputChange (event) {
@@ -53,19 +52,21 @@ class EditPortfolio extends React.Component {
 
   addCrypto () {
     const name = this.state.dropdown
-    const dataFromListing = this.props.cryptoListings.find(crypto => crypto.name === name)
 
-    this.setState(prevState => ({
-      portfolio: {
-        ...prevState.portfolio,
-        [name]: {
-          id: dataFromListing.id,
-          name,
-          symbol: dataFromListing.symbol,
-          quantity: 0
+    if (name !== 'Pick Cryptocurrency') {
+      const dataFromListing = this.props.cryptoListings.find(crypto => crypto.name === name)
+      this.setState(prevState => ({
+        portfolio: {
+          ...prevState.portfolio,
+          [name]: {
+            id: dataFromListing.id,
+            name,
+            symbol: dataFromListing.symbol,
+            quantity: 0
+          }
         }
-      }
-    }))
+      }))
+    }
   }
 
   // TODO prevent user from picking same crypto multiple times in add menu
@@ -99,10 +100,10 @@ class EditPortfolio extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <div className="title-and-button">
           <div className="portfolio-title">Portfolio</div>
-          <button className="edit fade-in-out">
+          <button className="edit fade-in-out" type='button' onClick={() => this.props.editPortfolioToggle()}>
             Cancel
           </button>
-          <button className="edit fade-in-out">
+          <button className="edit fade-in-out" type='submit'>
             Save
           </button>
         </div>
