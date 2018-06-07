@@ -9,7 +9,10 @@ import {
   GET_PORTFOLIO_ERROR,
   GET_CRYPTO_LISTINGS_REQUEST,
   GET_CRYPTO_LISTINGS_SUCCESS,
-  GET_CRYPTO_LISTINGS_ERROR
+  GET_CRYPTO_LISTINGS_ERROR,
+  EDIT_PORTFOLIO_REQUEST,
+  EDIT_PORTFOLIO_SUCCESS,
+  EDIT_PORTFOLIO_ERROR
 } from './types'
 import React from 'react'
 import fetch from 'isomorphic-fetch'
@@ -173,5 +176,46 @@ export const getCryptoListings = () => async dispatch => {
   } catch (err) {
     console.log('error message: ', err)
     dispatch(getCryptoListingsError(err.toString()))
+  }
+}
+
+// EDIT PORTFOLIO
+
+
+const editPortfolioRequest = () => ({
+  type: EDIT_PORTFOLIO_REQUEST
+})
+
+const editPortfolioSuccess = portfolioData => ({
+  type: EDIT_PORTFOLIO_SUCCESS,
+  payload: portfolioData
+})
+
+const editPortfolioError = error => ({
+  type: EDIT_PORTFOLIO_ERROR,
+  payload: error
+})
+
+export const editPortfolio = updatedPortfolio => async (dispatch, getState) => {
+  dispatch(editPortfolioRequest())
+
+  try {
+    const authToken = getState().auth.authToken
+    const response = await fetch(`${API_BASE_URL}/users/portfolio`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedPortfolio),
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
+    })
+    await await normalizeResponseErrors(response)
+    const data = await response.json()
+
+    dispatch(editPortfolioSuccess(data.portfolio))
+    // dispatch(getPriceDataAndFormatPortfolio(data.portfolio))
+
+  } catch (err) {
+    console.log('error message: ', err)
+    dispatch(editPortfolioError(err.toString()))
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import './sign-up.css'
-import { editPortfolioToggle, getCryptoListings } from '../actions'
+import { editPortfolioToggle, getCryptoListings, editPortfolio } from '../actions'
 import { connect } from 'react-redux'
 import './edit-portfolio.css'
 
@@ -47,7 +47,7 @@ class EditPortfolio extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault()
-    console.log(this.state)
+    this.props.editPortfolio(this.state.portfolio)
   }
 
   addCrypto () {
@@ -131,7 +131,8 @@ function mapStateToProps (state) {
 
 const mapDispatchToProps = {
   editPortfolioToggle,
-  getCryptoListings
+  getCryptoListings,
+  editPortfolio
 }
 
 export default connect(

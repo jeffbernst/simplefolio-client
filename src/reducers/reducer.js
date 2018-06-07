@@ -7,7 +7,11 @@ import {
   GET_PORTFOLIO_REQUEST,
   GET_PORTFOLIO_SUCCESS,
   GET_PORTFOLIO_ERROR,
-  GET_CRYPTO_LISTINGS_SUCCESS, GET_CRYPTO_LISTINGS_REQUEST, GET_CRYPTO_LISTINGS_ERROR
+  GET_CRYPTO_LISTINGS_SUCCESS,
+  GET_CRYPTO_LISTINGS_REQUEST,
+  GET_CRYPTO_LISTINGS_ERROR,
+  EDIT_PORTFOLIO_REQUEST,
+  EDIT_PORTFOLIO_SUCCESS, EDIT_PORTFOLIO_ERROR
 } from '../actions/types'
 
 const initialState = {
@@ -74,6 +78,20 @@ export const reducer = (state = initialState, action) => {
         cryptoListings: action.payload
       }
     case GET_CRYPTO_LISTINGS_ERROR:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case EDIT_PORTFOLIO_REQUEST:
+      return {
+        ...state
+      }
+    case EDIT_PORTFOLIO_SUCCESS:
+      return {
+        ...state,
+        portfolioData: action.payload
+      }
+    case EDIT_PORTFOLIO_ERROR:
       return {
         ...state,
         error: action.payload
