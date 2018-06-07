@@ -7,11 +7,6 @@ import { ConnectedPortfolio } from './portfolio'
 import EditPortfolio from './edit-portfolio'
 import './portfolio-page.css'
 
-// const samplePortfolio = [
-//   {id: 1, quantity: 0.1},
-//   {id: 1230, quantity: 150}
-// ]
-
 class PortfolioPage extends React.Component {
   componentDidMount () {
     this.props.getPortfolio()

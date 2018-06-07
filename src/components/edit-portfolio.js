@@ -48,6 +48,7 @@ class EditPortfolio extends React.Component {
   handleSubmit (event) {
     event.preventDefault()
     this.props.editPortfolio(this.state.portfolio)
+    this.props.editPortfolioToggle()
   }
 
   addCrypto () {
@@ -70,6 +71,7 @@ class EditPortfolio extends React.Component {
   }
 
   // TODO prevent user from picking same crypto multiple times in add menu
+  // TODO crypto listings not in proper order for EOS
 
   render () {
     let portfolioKeys = Object.keys(this.state.portfolio)

@@ -160,7 +160,7 @@ const getCryptoListingsError = error => ({
   payload: error
 })
 
-// THUNK TO GET PRICE DATA AND THEN FORMAT PORTFOLIO
+// GET CRYPTO LISTINGS
 
 export const getCryptoListings = () => async dispatch => {
   dispatch(getCryptoListingsRequest())
@@ -168,8 +168,6 @@ export const getCryptoListings = () => async dispatch => {
   try {
     const response = await fetch('https://api.coinmarketcap.com/v2/listings/')
     const data = await response.json()
-
-
 
     dispatch(getCryptoListingsSuccess(data.data))
 
@@ -196,8 +194,11 @@ const editPortfolioError = error => ({
   payload: error
 })
 
-export const editPortfolio = updatedPortfolio => async (dispatch, getState) => {
+export const editPortfolio = updatedPortfolioObj => async (dispatch, getState) => {
   dispatch(editPortfolioRequest())
+
+  const portfolioKeys = Object.keys(updatedPortfolioObj)
+  const updatedPortfolio = portfolioKeys.map(key => updatedPortfolioObj[key])
 
   try {
     const authToken = getState().auth.authToken
@@ -205,14 +206,15 @@ export const editPortfolio = updatedPortfolio => async (dispatch, getState) => {
       method: 'PUT',
       body: JSON.stringify(updatedPortfolio),
       headers: {
-        Authorization: `Bearer ${authToken}`
+        Authorization: `Bearer ${authToken}`,
+        'content-type': 'application/json'
       }
     })
-    await await normalizeResponseErrors(response)
+    await normalizeResponseErrors(response)
     const data = await response.json()
 
     dispatch(editPortfolioSuccess(data.portfolio))
-    // dispatch(getPriceDataAndFormatPortfolio(data.portfolio))
+    dispatch(getPriceDataAndFormatPortfolio(data.portfolio))
 
   } catch (err) {
     console.log('error message: ', err)
