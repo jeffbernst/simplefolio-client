@@ -66,8 +66,8 @@ export const getPriceDataAndFormatPortfolio = portfolio => async dispatch => {
       priceData[singleData.data.id] = singleData.data
     })
 
-    dispatch(formatPortfolioAndPieChart(portfolio, data.data))
-    dispatch(getPriceDataSuccess(data.data))
+    dispatch(formatPortfolioAndPieChart(portfolio, priceData))
+    dispatch(getPriceDataSuccess(priceData))
 
   } catch (err) {
     console.log('error message: ', err)
