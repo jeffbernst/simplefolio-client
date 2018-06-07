@@ -56,16 +56,28 @@ export const getPriceDataAndFormatPortfolio = portfolio => async dispatch => {
       return !cryptoNamesInPriceData.includes(crypto.name)
     })
 
-    const priceDataToRetrieve = notIncludedInPriceData.map(crypto => {
+    const priceDataPromises = notIncludedInPriceData.map(crypto => {
       return fetch(`https://api.coinmarketcap.com/v2/ticker/${crypto.id}/`)
     })
 
-    const allResponses = await Promise.all(priceDataToRetrieve)
-    await allResponses.forEach(async response => {
+    const allResponses = await Promise.all(priceDataPromises)
+    const allData = await Promise.all(allResponses)
+    await allData.forEach(async response => {
       const singleData = await response.json()
       priceData[singleData.data.id] = singleData.data
     })
 
+    // Promise.all(priceDataPromises)
+    //   .then(allResponses => {
+    //     allResponses.forEach(response => {
+    //       response.json().then(singleData => priceData[singleData.data.id] = singleData.data)
+    //       // console.log({singleData})
+    //       // priceData[singleData.data.id] = singleData.data
+    //     })
+    //   }).then(() => dispatch(formatPortfolioAndPieChart(portfolio, priceData)))
+    //   .catch(err => console.error(err))
+
+    // console.log({priceData})
     dispatch(formatPortfolioAndPieChart(portfolio, priceData))
     dispatch(getPriceDataSuccess(priceData))
 

@@ -73,7 +73,6 @@ class EditPortfolio extends React.Component {
   // TODO prevent user from picking same crypto multiple times in add menu
   // TODO prevent user from saving if crypto has quantity of 0
   // TODO crypto listings not in proper order for EOS
-  // TODO add additional action to handle API request for crypto not in top 100
 
   render () {
     let portfolioKeys = Object.keys(this.state.portfolio)
