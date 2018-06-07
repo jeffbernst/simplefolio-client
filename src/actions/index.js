@@ -21,6 +21,8 @@ import { PortfolioEntry } from '../components/portfolio-entry'
 import { API_BASE_URL } from '../config'
 import { normalizeResponseErrors } from './utils'
 
+// GET PRICE DATA
+
 const getPriceDataRequest = () => ({
   type: GET_PRICE_DATA_REQUEST
 })
@@ -35,7 +37,7 @@ const getPriceDataError = error => ({
   payload: error
 })
 
-// THUNK TO GET PRICE DATA AND THEN FORMAT PORTFOLIO
+// GET PRICE DATA AND THEN FORMAT PORTFOLIO
 
 export const getPriceDataAndFormatPortfolio = portfolio => async dispatch => {
   dispatch(getPriceDataRequest())
@@ -43,6 +45,26 @@ export const getPriceDataAndFormatPortfolio = portfolio => async dispatch => {
   try {
     const response = await fetch('https://api.coinmarketcap.com/v2/ticker/')
     const data = await response.json()
+
+    // initial fetch only gets price data for top 100 cryptocurrencies
+    // need to check which ones we don't have and retrieve individually
+    const priceData = data.data
+    const priceDataKeys = Object.keys(priceData)
+    const cryptoNamesInPriceData = priceDataKeys.map(key => priceData[key].name)
+
+    const notIncludedInPriceData = portfolio.filter(crypto => {
+      return !cryptoNamesInPriceData.includes(crypto.name)
+    })
+
+    const priceDataToRetrieve = notIncludedInPriceData.map(crypto => {
+      return fetch(`https://api.coinmarketcap.com/v2/ticker/${crypto.id}/`)
+    })
+
+    const allResponses = await Promise.all(priceDataToRetrieve)
+    await allResponses.forEach(async response => {
+      const singleData = await response.json()
+      priceData[singleData.data.id] = singleData.data
+    })
 
     dispatch(formatPortfolioAndPieChart(portfolio, data.data))
     dispatch(getPriceDataSuccess(data.data))
@@ -178,7 +200,6 @@ export const getCryptoListings = () => async dispatch => {
 }
 
 // EDIT PORTFOLIO
-
 
 const editPortfolioRequest = () => ({
   type: EDIT_PORTFOLIO_REQUEST
