@@ -1,64 +1,48 @@
 import React from 'react'
 import './sign-up.css'
-import { Field, reduxForm, focus } from 'redux-form'
-import Input from './input'
-import { Dropdown } from './dropdown'
 import { editPortfolioToggle, getCryptoListings } from '../actions'
 import { connect } from 'react-redux'
 import './edit-portfolio.css'
-import { nonEmpty, required } from '../validators'
 
 class EditPortfolio extends React.Component {
-  state = {
-    portfolio: this.props.portfolioData
+  // state = {
+  //   portfolio: this.props.portfolioData
+  // }
+  constructor (props) {
+    super(props)
+
+    let holdings = {}
+    this.props.portfolioData.forEach(crypto => holdings[crypto.name] = crypto.quantity)
+
+    this.state = {
+      portfolio: this.props.portfolioData,
+      dropdown: 'Pick Cryptocurrency',
+      ...holdings
+    }
+
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount () {
     this.props.getCryptoListings()
-
-    // initialize values for fields
-    // when editing portfolio
-    let initialValues = {}
-    this.state.portfolio.forEach(crypto => {
-      initialValues[crypto.name] = crypto.quantity
-    })
-    console.log(initialValues)
-    // this.props.initialize({initialValues})
-
-    console.log({'Bitcoin': 0.1, 'Steem': 150})
-    this.props.initialize({'Bitcoin': 0.1, 'Steem': 150})
   }
 
-  onSubmit (values) {
-    // handle different button actions
-    switch (values.action) {
-      case 'cancel':
-        this.props.editPortfolioToggle()
-        break
-      case 'save':
-        console.log({values})
-        break
-      case 'add':
-        console.log({values})
-        break
-      default:
-        console.log('error submitting edit portfolio form')
-    }
+  handleInputChange (event) {
+    const value = event.target.value
+    const name = event.target.name
+
+    this.setState({
+      [name]: value
+    })
+  }
+
+  handleSubmit (event) {
+    event.preventDefault()
+    console.log(this.state)
   }
 
   render () {
-    let error
-    if (this.props.error) {
-      error = (
-        <div className="form-error" aria-live="polite">
-          {this.props.error}
-        </div>
-      )
-    }
-
-    const {handleSubmit} = this.props
-
-    // create fields to edit each crypto in portfolio
     let editPortfolioFields
     if (this.state.portfolio)
       editPortfolioFields = this.state.portfolio.map((crypto, index) => {
@@ -66,13 +50,11 @@ class EditPortfolio extends React.Component {
           <div className='edit-portfolio-field' key={index}>
             {crypto.name}
             <div className="edit-input-container">
-              <Field component={Input}
-                     type="number"
-                     id={crypto.name}
-                     name={crypto.name}
-                     validate={[required]}
-                     quantity={crypto.quantity}
-                     required/>&nbsp;
+              <input
+                name={crypto.name}
+                type="number"
+                value={this.state[crypto.name]}
+                onChange={this.handleInputChange}/>&nbsp;
               {crypto.symbol}
               {/* x to close div goes here*/}
             </div>
@@ -80,57 +62,57 @@ class EditPortfolio extends React.Component {
         )
       })
 
+    let cryptoNames = []
+    let cryptoDropdownOptions = []
+    if (this.props.cryptoListings) {
+      cryptoNames = this.props.cryptoListings.map(cryptoData => cryptoData.name)
+      cryptoNames.sort()
+      cryptoDropdownOptions = cryptoNames.map((name, index) => <option key={index} value={name}>{name}</option>)
+    }
+
     return (
-      <div>
+      <form onSubmit={this.handleSubmit}>
         <div className="title-and-button">
           <div className="portfolio-title">Portfolio</div>
-          <button className="edit fade-in-out"
-                  onClick={handleSubmit(values => this.onSubmit({...values, action: 'cancel'}))}>
+          <button className="edit fade-in-out">
             Cancel
           </button>
-          <button className="edit fade-in-out"
-                  onClick={handleSubmit(values => this.onSubmit({...values, action: 'save'}))}>
+          <button className="edit fade-in-out">
             Save
           </button>
         </div>
         <div className="edit-portfolio">
-          {error}
           {editPortfolioFields}
           <div className="dropdown-container">
-            <Field
-              name="dropdown"
-              label="dropdown"
-              component={Dropdown}
-              currencies={this.props.cryptoListings}
-              className='dropdown'
-            />
-            <button className="edit fade-in-out"
-                    onClick={handleSubmit(values =>
-                      this.onSubmit({...values, action: 'add'}))}>Add
-            </button>
+            <select value={this.state.dropdown} onChange={this.handleInputChange} className='dropdown' name='dropdown'>
+              <option value="Pick Cryptocurrency" disabled>Pick Cryptocurrency</option>
+              {cryptoDropdownOptions}
+            </select>
+            <button className="edit fade-in-out" >Add</button>
           </div>
+          {/*<div className="dropdown-container">*/}
+          {/*<Field*/}
+          {/*name="dropdown"*/}
+          {/*label="dropdown"*/}
+          {/*component={Dropdown}*/}
+          {/*currencies={this.props.cryptoListings}*/}
+          {/*className='dropdown'*/}
+          {/*/>*/}
+          {/*<button className="edit fade-in-out"*/}
+          {/*onClick={handleSubmit(values =>*/}
+          {/*this.onSubmit({...values, action: 'add'}))}>Add*/}
+          {/*</button>*/}
+          {/*</div>*/}
         </div>
-      </div>
+      </form>
     )
   }
 }
 
 function mapStateToProps (state) {
-  // initialize values for fields
-  // when editing portfolio
-  // let initialValues
-  // if (state.index.portfolioData) {
-  //   initialValues = state.index.portfolioData.map(crypto => {
-  //     let cryptoObj = {}
-  //     cryptoObj[crypto.name] = crypto.quantity
-  //     return cryptoObj
-  //   })
-  // }
-
   return {
     portfolioData: state.index.portfolioData,
     cryptoListings: state.index.cryptoListings,
-    // initialValues
   }
 }
 
@@ -139,15 +121,7 @@ const mapDispatchToProps = {
   getCryptoListings
 }
 
-EditPortfolio = reduxForm({
-  form: 'edit-portfolio',
-  enableReinitialize: true,
-  onSubmitFail: (errors, dispatch) => dispatch(focus('edit-portfolio', 'password'))
-})(EditPortfolio)
-
-EditPortfolio = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(EditPortfolio)
-
-export default EditPortfolio
