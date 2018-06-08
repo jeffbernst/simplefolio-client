@@ -21,6 +21,7 @@ class EditPortfolio extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.addCrypto = this.addCrypto.bind(this)
+    this.removeCrypto = this.removeCrypto.bind(this)
   }
 
   componentDidMount () {
@@ -50,7 +51,7 @@ class EditPortfolio extends React.Component {
   handleSubmit (event) {
     event.preventDefault()
     const portfolioKeys = Object.keys(this.state.portfolio)
-    const containsZeroBalance = portfolioKeys.every(key => this.state.portfolio[key] !== 0)
+    const containsZeroBalance = portfolioKeys.every(key => this.state.portfolio[key] === 0)
     if (containsZeroBalance) {
       this.setState({
         zeroBalanceAlert: true
@@ -98,7 +99,14 @@ class EditPortfolio extends React.Component {
     }
   }
 
-  // TODO prevent duplicate entries
+  // {Bitcoin: {name: 'Bitcoin', symbol: 'BTC'},
+
+  removeCrypto (name) {
+    let portfolio = Object.assign({}, this.state.portfolio)
+    delete portfolio[name]
+    this.setState({portfolio})
+  }
+
   // TODO add remove crypto from portfolio button
 
   render () {
@@ -114,7 +122,8 @@ class EditPortfolio extends React.Component {
               value={this.state.portfolio[key].quantity}
               onChange={this.handleInputChange}/>&nbsp;
             {this.state.portfolio[key].symbol}
-            {/* x to close div goes here*/}
+            <div className="remove-item fade-in-out"
+                 onClick={() => this.removeCrypto(this.state.portfolio[key].name)}>&times;</div>
           </div>
         </div>
       )
@@ -159,11 +168,11 @@ class EditPortfolio extends React.Component {
             </select>
             <button type='button' className="edit fade-in-out" onClick={this.addCrypto}>Add</button>
           </div>
-          <div className='edit-message already-added'
-               style={{display: alreadyAdded}}>
+          <button className='edit-message already-added'
+                  style={{display: alreadyAdded}}>
             Already added!
             <span role='img' aria-label='pointing down emoji'>&#128070;</span>
-          </div>
+          </button>
         </div>
       </form>
     )

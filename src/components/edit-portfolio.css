@@ -53,3 +53,22 @@
   50% { opacity: 1; }
 }
 
+.remove-item {
+  border: 2px solid var(--dark-gray);
+  color: var(--dark-gray);
+  border-radius: 50%;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  font-size: 20px;
+  vertical-align: middle;
+  line-height: 20px;
+  margin-left: 10px;
+}
+
+.remove-item:hover {
+  background: var(--dark-gray);
+  color: white;
+}
+
