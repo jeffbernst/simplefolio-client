@@ -73,6 +73,7 @@ class EditPortfolio extends React.Component {
   // TODO prevent user from picking same crypto multiple times in add menu
   // TODO prevent user from saving if crypto has quantity of 0
   // TODO crypto listings not in proper order for EOS
+  // TODO add remove crypto from portfolio button
 
   render () {
     let portfolioKeys = Object.keys(this.state.portfolio)
@@ -95,7 +96,12 @@ class EditPortfolio extends React.Component {
 
     let cryptoDropdownOptions = []
     if (this.props.cryptoListings) {
-      let cryptoNames = this.props.cryptoListings.map(cryptoData => cryptoData.name).sort()
+      let cryptoNames = this.props.cryptoListings.map(cryptoData => cryptoData.name).sort((a, b) => {
+        a = a.toLowerCase();
+        b = b.toLowerCase();
+        if( a === b) return 0;
+        return a < b ? -1 : 1;
+      })
       cryptoDropdownOptions = cryptoNames.map((name, index) => <option key={index} value={name}>{name}</option>)
     }
 
