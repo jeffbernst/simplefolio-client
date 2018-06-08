@@ -50,8 +50,17 @@ class EditPortfolio extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault()
-    const portfolioKeys = Object.keys(this.state.portfolio)
-    const containsZeroBalance = portfolioKeys.every(key => this.state.portfolio[key] === 0)
+    // check if zero balance exists only if portfolio isn't empty
+    let containsZeroBalance
+    if (Object.keys(this.state.portfolio).length === 0 && this.state.portfolio.constructor === Object) {
+      containsZeroBalance = false
+    } else {
+      const portfolioKeys = Object.keys(this.state.portfolio)
+      portfolioKeys.forEach(key => {
+        if (this.state.portfolio[key].quantity === 0) containsZeroBalance = true
+      })
+    }
+
     if (containsZeroBalance) {
       this.setState({
         zeroBalanceAlert: true
@@ -99,15 +108,11 @@ class EditPortfolio extends React.Component {
     }
   }
 
-  // {Bitcoin: {name: 'Bitcoin', symbol: 'BTC'},
-
   removeCrypto (name) {
     let portfolio = Object.assign({}, this.state.portfolio)
     delete portfolio[name]
     this.setState({portfolio})
   }
-
-  // TODO add remove crypto from portfolio button
 
   render () {
     let portfolioKeys = Object.keys(this.state.portfolio)
@@ -168,11 +173,11 @@ class EditPortfolio extends React.Component {
             </select>
             <button type='button' className="edit fade-in-out" onClick={this.addCrypto}>Add</button>
           </div>
-          <button className='edit-message already-added'
+          <div className='edit-message already-added'
                   style={{display: alreadyAdded}}>
             Already added!
-            <span role='img' aria-label='pointing down emoji'>&#128070;</span>
-          </button>
+            <span role='img' aria-label='pointing up emoji'>&#128070;</span>
+          </div>
         </div>
       </form>
     )

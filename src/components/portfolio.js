@@ -2,7 +2,7 @@ import React from 'react'
 import { formatPortfolioAndPieChart, getPriceDataAndFormatPortfolio, editPortfolioToggle } from '../actions'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import {PieChart} from './pie-chart'
+import { PieChart } from './pie-chart'
 
 class Portfolio extends React.Component {
   editPortfolioToggle () {
@@ -10,20 +10,33 @@ class Portfolio extends React.Component {
   }
 
   render () {
+    const renderedPortfolio = (
+      <div className='portfolio'>
+        <div className="portfolio-list">
+          {this.props.formattedPortfolioList}
+        </div>
+        <div className="pie-chart">
+          {this.props.pieChartData && <PieChart pieChartData={this.props.pieChartData}/>}
+        </div>
+      </div>
+    )
+
+    // wait to display content until we get
+    // portfolioData from redux store
+    let portfolioSection
+    if (this.props.portfolioData)
+      portfolioSection =
+        this.props.portfolioData.length === 0
+          ? 'Click the edit button above to add to your portfolio \uD83D\uDC46'
+          : renderedPortfolio
+
     return (
       <div>
         <div className="title-and-button">
           <div className="portfolio-title">Portfolio</div>
           <button className="edit fade-in-out" onClick={() => this.editPortfolioToggle()}>Edit</button>
         </div>
-        <div className="portfolio">
-          <div className="portfolio-list">
-            {this.props.formattedPortfolioList}
-          </div>
-          <div className="pie-chart">
-            {this.props.pieChartData && <PieChart pieChartData={this.props.pieChartData}/>}
-          </div>
-        </div>
+        {portfolioSection}
       </div>
     )
   }
@@ -32,6 +45,7 @@ class Portfolio extends React.Component {
 function mapStateToProps (state) {
   return {
     loading: state.index.loading,
+    portfolioData: state.index.portfolioData,
     cryptoPriceData: state.index.cryptoPriceData,
     formattedPortfolioList: state.index.formattedPortfolioList,
     pieChartData: state.index.pieChartData

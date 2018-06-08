@@ -7,6 +7,8 @@ import { ConnectedPortfolio } from './portfolio'
 import EditPortfolio from './edit-portfolio'
 import './portfolio-page.css'
 
+// TODO message for new user without portfolio or watchlist data
+
 class PortfolioPage extends React.Component {
   componentDidMount () {
     this.props.getPortfolio()
