@@ -60,29 +60,20 @@ export const getPriceDataAndFormatPortfolio = portfolio => async dispatch => {
       return fetch(`https://api.coinmarketcap.com/v2/ticker/${crypto.id}/`)
     })
 
-    const allResponses = await Promise.all(priceDataPromises)
-    const allData = await Promise.all(allResponses)
-    await allData.forEach(async response => {
-      const singleData = await response.json()
-      priceData[singleData.data.id] = singleData.data
-    })
+    Promise.all(priceDataPromises)
+      .then(allResponses => {
+        Promise.all(allResponses.map(response => response.json()))
+          .then(allResponses => allResponses.forEach(singleData => {
+            priceData[singleData.data.id] = singleData.data
+          }))
+          .then(() => dispatch(formatPortfolioAndPieChart(portfolio, priceData)))
+      })
+      .catch(err => console.error(err))
 
-    // Promise.all(priceDataPromises)
-    //   .then(allResponses => {
-    //     allResponses.forEach(response => {
-    //       response.json().then(singleData => priceData[singleData.data.id] = singleData.data)
-    //       // console.log({singleData})
-    //       // priceData[singleData.data.id] = singleData.data
-    //     })
-    //   }).then(() => dispatch(formatPortfolioAndPieChart(portfolio, priceData)))
-    //   .catch(err => console.error(err))
-
-    // console.log({priceData})
-    dispatch(formatPortfolioAndPieChart(portfolio, priceData))
     dispatch(getPriceDataSuccess(priceData))
 
   } catch (err) {
-    console.log('error message: ', err)
+    console.error('error message: ', err)
     dispatch(getPriceDataError(err.toString()))
   }
 }
