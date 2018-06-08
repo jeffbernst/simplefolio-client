@@ -34,3 +34,22 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.edit-message {
+  font-size: 18px;
+  margin-left: 20px;
+  display: none;
+  -webkit-animation: fadeinout 2s linear forwards;
+  animation: fadeinout 2s linear forwards;
+}
+
+@-webkit-keyframes fadeinout {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+

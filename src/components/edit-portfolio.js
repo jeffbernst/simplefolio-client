@@ -13,7 +13,9 @@ class EditPortfolio extends React.Component {
 
     this.state = {
       portfolio: holdings,
-      dropdown: 'Pick Cryptocurrency'
+      dropdown: 'Pick Cryptocurrency',
+      alreadyAddedAlert: false,
+      zeroBalanceAlert: false
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -47,14 +49,40 @@ class EditPortfolio extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault()
-    this.props.editPortfolio(this.state.portfolio)
-    this.props.editPortfolioToggle()
+    const portfolioKeys = Object.keys(this.state.portfolio)
+    const containsZeroBalance = portfolioKeys.every(key => this.state.portfolio[key] !== 0)
+    if (containsZeroBalance) {
+      this.setState({
+        zeroBalanceAlert: true
+      })
+      setTimeout(() => {
+        this.setState({
+          zeroBalanceAlert: false
+        })
+      }, 2000)
+    } else {
+      this.props.editPortfolio(this.state.portfolio)
+      this.props.editPortfolioToggle()
+    }
   }
 
   addCrypto () {
     const name = this.state.dropdown
+    const portfolioKeys = Object.keys(this.state.portfolio)
+    const alreadyAdded = portfolioKeys.includes(name)
 
-    if (name !== 'Pick Cryptocurrency') {
+    if (alreadyAdded) {
+      // toggle display style of already added alert message
+      this.setState({
+        alreadyAddedAlert: true
+      })
+      setTimeout(() => {
+        this.setState({
+          alreadyAddedAlert: false
+        })
+      }, 2000)
+    }
+    else if (name !== 'Pick Cryptocurrency' && !alreadyAdded) {
       const dataFromListing = this.props.cryptoListings.find(crypto => crypto.name === name)
       this.setState(prevState => ({
         portfolio: {
@@ -70,9 +98,7 @@ class EditPortfolio extends React.Component {
     }
   }
 
-  // TODO prevent user from picking same crypto multiple times in add menu
-  // TODO prevent user from saving if crypto has quantity of 0
-  // TODO crypto listings not in proper order for EOS
+  // TODO prevent duplicate entries
   // TODO add remove crypto from portfolio button
 
   render () {
@@ -97,13 +123,16 @@ class EditPortfolio extends React.Component {
     let cryptoDropdownOptions = []
     if (this.props.cryptoListings) {
       let cryptoNames = this.props.cryptoListings.map(cryptoData => cryptoData.name).sort((a, b) => {
-        a = a.toLowerCase();
-        b = b.toLowerCase();
-        if( a === b) return 0;
-        return a < b ? -1 : 1;
+        a = a.toLowerCase()
+        b = b.toLowerCase()
+        if (a === b) return 0
+        return a < b ? -1 : 1
       })
       cryptoDropdownOptions = cryptoNames.map((name, index) => <option key={index} value={name}>{name}</option>)
     }
+
+    const alreadyAdded = this.state.alreadyAddedAlert ? 'block' : 'none'
+    const zeroBalance = this.state.zeroBalanceAlert ? 'block' : 'none'
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -115,6 +144,11 @@ class EditPortfolio extends React.Component {
           <button className="edit fade-in-out" type='submit'>
             Save
           </button>
+          <div className="edit-message zero-balance"
+               style={{display: zeroBalance}}>
+            Can't add zero balance!
+            <span role='img' aria-label='pointing down emoji'>&#128071;</span>
+          </div>
         </div>
         <div className="edit-portfolio">
           {editPortfolioFields}
@@ -124,6 +158,11 @@ class EditPortfolio extends React.Component {
               {cryptoDropdownOptions}
             </select>
             <button type='button' className="edit fade-in-out" onClick={this.addCrypto}>Add</button>
+          </div>
+          <div className='edit-message already-added'
+               style={{display: alreadyAdded}}>
+            Already added!
+            <span role='img' aria-label='pointing down emoji'>&#128070;</span>
           </div>
         </div>
       </form>
