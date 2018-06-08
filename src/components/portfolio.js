@@ -21,13 +21,26 @@ class Portfolio extends React.Component {
       </div>
     )
 
-    // wait to display content until we get
-    // portfolioData from redux store
+    const clickEditPortfolioMessage = (
+      <div className="portfolio">
+        <div>
+          Click the edit button above to add to your portfolio
+          <span role='img' aria-label='pointing up emoji'>&#128070;</span>
+        </div>
+      </div>
+    )
+
+    const renderedWatchlist = (
+      <div className='watchlist'>
+        {this.props.formattedWatchlist}
+      </div>
+    )
+
     let portfolioSection
     if (this.props.portfolioData)
       portfolioSection =
         this.props.portfolioData.length === 0
-          ? 'Click the edit button above to add to your portfolio \uD83D\uDC46'
+          ? clickEditPortfolioMessage
           : renderedPortfolio
 
     return (
@@ -37,6 +50,11 @@ class Portfolio extends React.Component {
           <button className="edit fade-in-out" onClick={() => this.editPortfolioToggle()}>Edit</button>
         </div>
         {portfolioSection}
+        <div className="title-and-button">
+          <div className="portfolio-title">Watchlist</div>
+          <button className="edit fade-in-out" onClick={() => this.editPortfolioToggle()}>Edit</button>
+        </div>
+        {renderedWatchlist}
       </div>
     )
   }
@@ -48,7 +66,8 @@ function mapStateToProps (state) {
     portfolioData: state.index.portfolioData,
     cryptoPriceData: state.index.cryptoPriceData,
     formattedPortfolioList: state.index.formattedPortfolioList,
-    pieChartData: state.index.pieChartData
+    pieChartData: state.index.pieChartData,
+    formattedWatchlist: state.index.formattedWatchlist
   }
 }
 

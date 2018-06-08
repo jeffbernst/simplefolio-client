@@ -20,6 +20,13 @@
   color: white;
 }
 
-.portfolio {
+.portfolio, .watchlist {
   margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.watchlist {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
 }

@@ -13,6 +13,11 @@ import {
   EDIT_PORTFOLIO_REQUEST,
   EDIT_PORTFOLIO_SUCCESS, EDIT_PORTFOLIO_ERROR
 } from '../actions/types'
+import React from 'react'
+import {WatchlistWidget} from '../components/watchlist-widget'
+
+const sampleWatchlist = [1, 1027, 1230, 1765, 1376, 1839]
+const watchlistGrid = sampleWatchlist.map((item, index) => <WatchlistWidget currencyId={item} key={index}/>)
 
 const initialState = {
   loading: false,
@@ -21,7 +26,8 @@ const initialState = {
   formattedPortfolioList: undefined,
   pieChartData: undefined,
   editPortfolio: false,
-  cryptoListings: undefined
+  cryptoListings: undefined,
+  formattedWatchlist: watchlistGrid
 }
 
 export const reducer = (state = initialState, action) => {
