@@ -23,16 +23,16 @@ import { normalizeResponseErrors } from './utils'
 
 // GET PRICE DATA
 
-const getPriceDataRequest = () => ({
+export const getPriceDataRequest = () => ({
   type: GET_PRICE_DATA_REQUEST
 })
 
-const getPriceDataSuccess = priceData => ({
+export const getPriceDataSuccess = priceData => ({
   type: GET_PRICE_DATA_SUCCES,
   payload: priceData
 })
 
-const getPriceDataError = error => ({
+export const getPriceDataError = error => ({
   type: GET_PRICE_DATA_ERROR,
   payload: error
 })
