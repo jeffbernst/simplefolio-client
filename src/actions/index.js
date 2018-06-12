@@ -16,7 +16,12 @@ import {
   GET_WATCHLIST_REQUEST,
   GET_WATCHLIST_SUCCESS,
   GET_WATCHLIST_ERROR,
-  FORMAT_WATCHLIST, EDIT_WATCHLIST_TOGGLE, EDIT_WATCHLIST_REQUEST, EDIT_WATCHLIST_SUCCESS, EDIT_WATCHLIST_ERROR
+  FORMAT_WATCHLIST,
+  EDIT_WATCHLIST_TOGGLE,
+  EDIT_WATCHLIST_REQUEST,
+  EDIT_WATCHLIST_SUCCESS,
+  EDIT_WATCHLIST_ERROR,
+  UPDATE_PORTFOLIO_TOTAL
 } from './types'
 import React from 'react'
 import fetch from 'isomorphic-fetch'
@@ -94,6 +99,7 @@ const formatPortfolio = (portfolioList, pieChartData) => ({
 export const formatPortfolioAndPieChart = (portfolio, priceData) => dispatch => {
   let portfolioList
   let pieChartData = []
+  let portfolioTotal = 0
   portfolioList = portfolio.map((item, index) => {
     // iterate through portfolio holdings and match up with current price data
     const itemData = priceData[item.id]
@@ -103,7 +109,10 @@ export const formatPortfolioAndPieChart = (portfolio, priceData) => dispatch => 
     const percentChange = itemData.quotes.USD.percent_change_24h
     const {quantity} = item
     const balance = (quantity * price).toFixed(2)
+    const balanceWithCommas = balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     const colorIndex = index <= colors.length ? index : index % colors.length
+
+    portfolioTotal += parseFloat(balance)
 
     pieChartData.push({
       theta: balance,
@@ -114,7 +123,7 @@ export const formatPortfolioAndPieChart = (portfolio, priceData) => dispatch => 
     return (
       <PortfolioEntry
         name={name}
-        balance={balance}
+        balance={balanceWithCommas}
         quantity={quantity}
         symbol={symbol}
         price={priceWithCommas}
@@ -125,8 +134,18 @@ export const formatPortfolioAndPieChart = (portfolio, priceData) => dispatch => 
     )
   })
 
+  const portfolioTotalWithCommas = portfolioTotal.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
   dispatch(formatPortfolio(portfolioList, pieChartData))
+  dispatch(updatePortfolioTotal(portfolioTotalWithCommas))
 }
+
+// UPDATE PORTFOLIO TOTAL
+
+export const updatePortfolioTotal = portfolioTotal => ({
+  type: UPDATE_PORTFOLIO_TOTAL,
+  payload: portfolioTotal
+})
 
 // EDIT PORTFOLIO TOGGLE
 

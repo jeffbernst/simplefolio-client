@@ -17,7 +17,7 @@ import {
   GET_WATCHLIST_SUCCESS,
   GET_WATCHLIST_ERROR,
   FORMAT_WATCHLIST,
-  EDIT_WATCHLIST_TOGGLE, EDIT_WATCHLIST_REQUEST, EDIT_WATCHLIST_SUCCESS, EDIT_WATCHLIST_ERROR
+  EDIT_WATCHLIST_TOGGLE, EDIT_WATCHLIST_REQUEST, EDIT_WATCHLIST_SUCCESS, EDIT_WATCHLIST_ERROR, UPDATE_PORTFOLIO_TOTAL
 } from '../actions/types'
 
 const initialState = {
@@ -30,7 +30,8 @@ const initialState = {
   cryptoListings: undefined,
   watchlistData: undefined,
   formattedWatchlist: undefined,
-  editWatchlist: false
+  editWatchlist: false,
+  portfolioTotal: '0'
 }
 
 export const reducer = (state = initialState, action) => {
@@ -90,6 +91,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload
+      }
+    case UPDATE_PORTFOLIO_TOTAL:
+      return {
+        ...state,
+        portfolioTotal: action.payload
       }
     case EDIT_PORTFOLIO_REQUEST:
       return {
