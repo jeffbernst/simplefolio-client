@@ -12,7 +12,12 @@ import {
   GET_CRYPTO_LISTINGS_ERROR,
   EDIT_PORTFOLIO_REQUEST,
   EDIT_PORTFOLIO_SUCCESS,
-  EDIT_PORTFOLIO_ERROR, GET_WATCHLIST_REQUEST, GET_WATCHLIST_SUCCESS, GET_WATCHLIST_ERROR, FORMAT_WATCHLIST
+  EDIT_PORTFOLIO_ERROR,
+  GET_WATCHLIST_REQUEST,
+  GET_WATCHLIST_SUCCESS,
+  GET_WATCHLIST_ERROR,
+  FORMAT_WATCHLIST,
+  EDIT_WATCHLIST_TOGGLE
 } from '../actions/types'
 
 const initialState = {
@@ -118,6 +123,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         formattedWatchlist: action.payload
+      }
+    case EDIT_WATCHLIST_TOGGLE:
+      return {
+        ...state,
+        editWatchlist: !state.editWatchlist
       }
     default:
       return state

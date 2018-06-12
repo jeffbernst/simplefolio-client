@@ -30,12 +30,6 @@ class Portfolio extends React.Component {
       </div>
     )
 
-    const renderedWatchlist = (
-      <div className='watchlist'>
-        {this.props.formattedWatchlist}
-      </div>
-    )
-
     let portfolioSection
     if (this.props.portfolioData)
       portfolioSection =
@@ -50,11 +44,6 @@ class Portfolio extends React.Component {
           <button className="edit fade-in-out" onClick={() => this.editPortfolioToggle()}>Edit</button>
         </div>
         {portfolioSection}
-        <div className="title-and-button">
-          <div className="portfolio-title">Watchlist</div>
-          <button className="edit fade-in-out" onClick={() => this.editPortfolioToggle()}>Edit</button>
-        </div>
-        {renderedWatchlist}
       </div>
     )
   }
@@ -67,7 +56,6 @@ function mapStateToProps (state) {
     cryptoPriceData: state.index.cryptoPriceData,
     formattedPortfolioList: state.index.formattedPortfolioList,
     pieChartData: state.index.pieChartData,
-    formattedWatchlist: state.index.formattedWatchlist
   }
 }
 

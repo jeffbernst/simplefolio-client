@@ -16,7 +16,7 @@ import {
   GET_WATCHLIST_REQUEST,
   GET_WATCHLIST_SUCCESS,
   GET_WATCHLIST_ERROR,
-  FORMAT_WATCHLIST
+  FORMAT_WATCHLIST, EDIT_WATCHLIST_TOGGLE
 } from './types'
 import React from 'react'
 import fetch from 'isomorphic-fetch'
@@ -24,7 +24,7 @@ import { colors, darkGray } from '../colors'
 import { PortfolioEntry } from '../components/portfolio-entry'
 import { API_BASE_URL } from '../config'
 import { normalizeResponseErrors } from './utils'
-import {WatchlistWidget} from '../components/watchlist-widget'
+import { WatchlistWidget } from '../components/watchlist-widget'
 
 // GET PRICE DATA
 
@@ -293,3 +293,9 @@ export const getWatchlist = () => async (dispatch, getState) => {
     dispatch(getWatchlistError(err.toString()))
   }
 }
+
+// EDIT WATCHLIST
+
+export const editWatchlistToggle = () => ({
+  type: EDIT_WATCHLIST_TOGGLE
+})
