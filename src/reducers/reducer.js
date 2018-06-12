@@ -17,7 +17,7 @@ import {
   GET_WATCHLIST_SUCCESS,
   GET_WATCHLIST_ERROR,
   FORMAT_WATCHLIST,
-  EDIT_WATCHLIST_TOGGLE
+  EDIT_WATCHLIST_TOGGLE, EDIT_WATCHLIST_REQUEST, EDIT_WATCHLIST_SUCCESS, EDIT_WATCHLIST_ERROR
 } from '../actions/types'
 
 const initialState = {
@@ -128,6 +128,20 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         editWatchlist: !state.editWatchlist
+      }
+    case EDIT_WATCHLIST_REQUEST:
+      return {
+        ...state
+      }
+    case EDIT_WATCHLIST_SUCCESS:
+      return {
+        ...state,
+        watchlistData: action.payload
+      }
+    case EDIT_WATCHLIST_ERROR:
+      return {
+        ...state,
+        error: action.payload
       }
     default:
       return state

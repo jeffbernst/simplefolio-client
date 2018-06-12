@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getCryptoListings, editWatchlistToggle } from '../actions'
+import { getCryptoListings, editWatchlistToggle, editWatchlist } from '../actions'
 
 class EditWatchlist extends React.Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      watchlist: [...this.props.watchlistData],
+      watchlist: this.props.watchlistData.slice(),
       dropdown: 'Pick Cryptocurrency',
       alreadyAddedAlert: false,
     }
@@ -32,9 +32,8 @@ class EditWatchlist extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault()
-    console.log('submitted')
-    // this.props.editPortfolio(this.state.portfolio)
-    // this.props.editPortfolioToggle()
+    this.props.editWatchlist(this.state.watchlist)
+    this.props.editWatchlistToggle()
   }
 
   addCrypto () {
@@ -144,7 +143,8 @@ function mapStateToProps (state) {
 
 const mapDispatchToProps = {
   editWatchlistToggle,
-  getCryptoListings
+  getCryptoListings,
+  editWatchlist
 }
 
 export default connect(

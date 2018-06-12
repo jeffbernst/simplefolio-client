@@ -16,7 +16,7 @@ import {
   GET_WATCHLIST_REQUEST,
   GET_WATCHLIST_SUCCESS,
   GET_WATCHLIST_ERROR,
-  FORMAT_WATCHLIST, EDIT_WATCHLIST_TOGGLE
+  FORMAT_WATCHLIST, EDIT_WATCHLIST_TOGGLE, EDIT_WATCHLIST_REQUEST, EDIT_WATCHLIST_SUCCESS, EDIT_WATCHLIST_ERROR
 } from './types'
 import React from 'react'
 import fetch from 'isomorphic-fetch'
@@ -223,6 +223,9 @@ const editPortfolioError = error => ({
 export const editPortfolio = updatedPortfolioObj => async (dispatch, getState) => {
   dispatch(editPortfolioRequest())
 
+  // portfolio is edited through local state in
+  // EditPortfolio component as an object
+  // need to convert back to array to save in DB
   const portfolioKeys = Object.keys(updatedPortfolioObj)
   const updatedPortfolio = portfolioKeys.map(key => updatedPortfolioObj[key])
 
@@ -294,8 +297,51 @@ export const getWatchlist = () => async (dispatch, getState) => {
   }
 }
 
-// EDIT WATCHLIST
+// EDIT WATCHLIST TOGGLE
 
 export const editWatchlistToggle = () => ({
   type: EDIT_WATCHLIST_TOGGLE
 })
+
+// EDIT WATCHLIST TOGGLE
+
+const editWatchlistRequest = () => ({
+  type: EDIT_WATCHLIST_REQUEST
+})
+
+const editWatchlistSuccess = watchlistData => ({
+  type: EDIT_WATCHLIST_SUCCESS,
+  payload: watchlistData
+})
+
+const editWatchlistError = error => ({
+  type: EDIT_WATCHLIST_ERROR,
+  payload: error
+})
+
+export const editWatchlist = updatedWatchlist => async (dispatch, getState) => {
+  dispatch(editWatchlistRequest())
+
+  try {
+    const authToken = getState().auth.authToken
+    const response = await fetch(`${API_BASE_URL}/users/watchlist`, {
+      method: 'PUT',
+      body: JSON.stringify(updatedWatchlist),
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        'content-type': 'application/json'
+      }
+    })
+    await normalizeResponseErrors(response)
+    const data = await response.json()
+
+    const watchlistGrid = data.watchlist.map((item, index) => <WatchlistWidget currencyId={item.id} key={index}/>)
+
+    dispatch(editWatchlistSuccess(data.watchlist))
+    dispatch(formatWatchlist(watchlistGrid))
+
+  } catch (err) {
+    console.log('error message: ', err)
+    dispatch(editWatchlistError(err.toString()))
+  }
+}
