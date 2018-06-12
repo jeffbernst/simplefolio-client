@@ -91,7 +91,6 @@ export const formatPortfolioAndPieChart = (portfolio, priceData) => dispatch => 
   let pieChartData = []
   portfolioList = portfolio.map((item, index) => {
     // iterate through portfolio holdings and match up with current price data
-    // const itemData = this.props.cryptoPriceData[item.id]
     const itemData = priceData[item.id]
     const {name, symbol} = itemData
     const price = itemData.quotes.USD.price.toFixed(2)

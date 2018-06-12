@@ -16,8 +16,12 @@ import {
 import React from 'react'
 import {WatchlistWidget} from '../components/watchlist-widget'
 
-const sampleWatchlist = [1, 1027, 1230, 1765, 1376, 1839]
-const watchlistGrid = sampleWatchlist.map((item, index) => <WatchlistWidget currencyId={item} key={index}/>)
+const sampleWatchlist = [{
+  id: 1,
+  name: 'Bitcoin',
+  symbol: 'BTC'
+}]
+const watchlistGrid = sampleWatchlist.map((item, index) => <WatchlistWidget currencyId={item.id} key={index}/>)
 
 const initialState = {
   loading: false,
