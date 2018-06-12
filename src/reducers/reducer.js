@@ -11,17 +11,9 @@ import {
   GET_CRYPTO_LISTINGS_REQUEST,
   GET_CRYPTO_LISTINGS_ERROR,
   EDIT_PORTFOLIO_REQUEST,
-  EDIT_PORTFOLIO_SUCCESS, EDIT_PORTFOLIO_ERROR
+  EDIT_PORTFOLIO_SUCCESS,
+  EDIT_PORTFOLIO_ERROR, GET_WATCHLIST_REQUEST, GET_WATCHLIST_SUCCESS, GET_WATCHLIST_ERROR, FORMAT_WATCHLIST
 } from '../actions/types'
-import React from 'react'
-import {WatchlistWidget} from '../components/watchlist-widget'
-
-const sampleWatchlist = [{
-  id: 1,
-  name: 'Bitcoin',
-  symbol: 'BTC'
-}]
-const watchlistGrid = sampleWatchlist.map((item, index) => <WatchlistWidget currencyId={item.id} key={index}/>)
 
 const initialState = {
   loading: false,
@@ -31,7 +23,9 @@ const initialState = {
   pieChartData: undefined,
   editPortfolio: false,
   cryptoListings: undefined,
-  formattedWatchlist: watchlistGrid
+  watchlistData: undefined,
+  formattedWatchlist: undefined,
+  editWatchlist: false
 }
 
 export const reducer = (state = initialState, action) => {
@@ -105,6 +99,25 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload
+      }
+    case GET_WATCHLIST_REQUEST:
+      return {
+        ...state
+      }
+    case GET_WATCHLIST_SUCCESS:
+      return {
+        ...state,
+        watchlistData: action.payload
+      }
+    case GET_WATCHLIST_ERROR:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case FORMAT_WATCHLIST:
+      return {
+        ...state,
+        formattedWatchlist: action.payload
       }
     default:
       return state

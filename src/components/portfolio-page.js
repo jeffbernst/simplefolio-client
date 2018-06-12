@@ -1,7 +1,13 @@
 import React from 'react'
 import ConnectedUserNav from './user-nav'
 import { connect } from 'react-redux'
-import { formatPortfolioAndPieChart, getPriceDataAndFormatPortfolio, editPortfolioToggle, getPortfolio } from '../actions'
+import {
+  formatPortfolioAndPieChart,
+  getPriceDataAndFormatPortfolio,
+  editPortfolioToggle,
+  getPortfolio,
+  getWatchlist
+} from '../actions'
 import { withRouter } from 'react-router-dom'
 import { ConnectedPortfolio } from './portfolio'
 import EditPortfolio from './edit-portfolio'
@@ -12,6 +18,7 @@ import './portfolio-page.css'
 class PortfolioPage extends React.Component {
   componentDidMount () {
     this.props.getPortfolio()
+    this.props.getWatchlist()
   }
 
   render () {
@@ -38,7 +45,8 @@ const mapDispatchToProps = {
   getPriceDataAndFormatPortfolio,
   formatPortfolioAndPieChart,
   editPortfolioToggle,
-  getPortfolio
+  getPortfolio,
+  getWatchlist
 }
 
 export const ConnectedPortfolioPage = withRouter(connect(mapStateToProps, mapDispatchToProps)(PortfolioPage))

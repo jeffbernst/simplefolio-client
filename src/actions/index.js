@@ -12,7 +12,11 @@ import {
   GET_CRYPTO_LISTINGS_ERROR,
   EDIT_PORTFOLIO_REQUEST,
   EDIT_PORTFOLIO_SUCCESS,
-  EDIT_PORTFOLIO_ERROR
+  EDIT_PORTFOLIO_ERROR,
+  GET_WATCHLIST_REQUEST,
+  GET_WATCHLIST_SUCCESS,
+  GET_WATCHLIST_ERROR,
+  FORMAT_WATCHLIST
 } from './types'
 import React from 'react'
 import fetch from 'isomorphic-fetch'
@@ -20,6 +24,7 @@ import { colors, darkGray } from '../colors'
 import { PortfolioEntry } from '../components/portfolio-entry'
 import { API_BASE_URL } from '../config'
 import { normalizeResponseErrors } from './utils'
+import {WatchlistWidget} from '../components/watchlist-widget'
 
 // GET PRICE DATA
 
@@ -184,8 +189,6 @@ const getCryptoListingsError = error => ({
   payload: error
 })
 
-// GET CRYPTO LISTINGS
-
 export const getCryptoListings = () => async dispatch => {
   dispatch(getCryptoListingsRequest())
 
@@ -242,5 +245,51 @@ export const editPortfolio = updatedPortfolioObj => async (dispatch, getState) =
   } catch (err) {
     console.log('error message: ', err)
     dispatch(editPortfolioError(err.toString()))
+  }
+}
+
+// GET WATCHLIST
+
+const getWatchlistRequest = () => ({
+  type: GET_WATCHLIST_REQUEST
+})
+
+const getWatchlistSuccess = watchlistData => ({
+  type: GET_WATCHLIST_SUCCESS,
+  payload: watchlistData
+})
+
+const getWatchlistError = error => ({
+  type: GET_WATCHLIST_ERROR,
+  payload: error
+})
+
+const formatWatchlist = formattedWatchlist => ({
+  type: FORMAT_WATCHLIST,
+  payload: formattedWatchlist
+})
+
+export const getWatchlist = () => async (dispatch, getState) => {
+  dispatch(getWatchlistRequest())
+
+  try {
+    const authToken = getState().auth.authToken
+    const response = await fetch(`${API_BASE_URL}/users`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
+    })
+    await await normalizeResponseErrors(response)
+    const data = await response.json()
+
+    const watchlistGrid = data.watchlist.map((item, index) => <WatchlistWidget currencyId={item.id} key={index}/>)
+
+    dispatch(getWatchlistSuccess(data.watchlist))
+    dispatch(formatWatchlist(watchlistGrid))
+
+  } catch (err) {
+    console.log('error message: ', err)
+    dispatch(getWatchlistError(err.toString()))
   }
 }
