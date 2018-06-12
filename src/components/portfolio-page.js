@@ -13,7 +13,7 @@ import { ConnectedPortfolio } from './portfolio'
 import EditPortfolio from './edit-portfolio'
 import './portfolio-page.css'
 import { ConnectedWatchlist } from './watchlist'
-import { EditWatchlist } from './edit-watchlist'
+import EditWatchlist from './edit-watchlist'
 
 // TODO message for new user without portfolio or watchlist data
 
