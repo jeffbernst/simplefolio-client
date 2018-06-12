@@ -125,7 +125,9 @@ class EditPortfolio extends React.Component {
               name={this.state.portfolio[key].name}
               type="number"
               value={this.state.portfolio[key].quantity}
-              onChange={this.handleInputChange}/>&nbsp;
+              onChange={this.handleInputChange}
+              step='any'
+              min='0'/>&nbsp;
             {this.state.portfolio[key].symbol}
             <div className="remove-item fade-in-out"
                  onClick={() => this.removeCrypto(this.state.portfolio[key].name)}>&times;</div>
