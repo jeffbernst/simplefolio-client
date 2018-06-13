@@ -1,5 +1,5 @@
 import React from 'react'
-import {WatchlistWidget} from './watchlist-widget'
+import { WatchlistWidget } from './watchlist-widget'
 import './landing-page-bottom-section.css'
 
 export function LandingPageBottomSection () {
@@ -12,8 +12,8 @@ export function LandingPageBottomSection () {
         <div className="landing-copy">
           Simplefolio also has a watchlist feature to track the coins you're interested in.
         </div>
-        <div className="watchlist-title">Watchlist</div>
-        <div className="watchlist-grid">
+        <div className="portfolio-title">Watchlist</div>
+        <div className="watchlist">
           {watchlistGrid}
         </div>
       </div>

@@ -6,24 +6,11 @@
 }
 
 .landing-copy {
-  width: 700px;
+  max-width: 700px;
   margin: 0 auto 50px auto;
   text-align: center;
   font-size: 24px;
   font-weight: bold;
 }
 
-.portfolio-title {
-  font-size: 36px;
-  font-weight: bold;
-}
-
-.portfolio {
-  display: flex;
-  justify-content: space-between;
-}
-
-.pie-chart {
-  margin-top: -15px;
-}
 

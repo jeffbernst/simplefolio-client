@@ -2,6 +2,7 @@ import React from 'react'
 import { getWatchlist, editWatchlistToggle } from '../actions'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import './watchlist.css'
 
 class Watchlist extends React.Component {
   editWatchlistToggle () {

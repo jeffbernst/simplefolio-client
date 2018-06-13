@@ -3,6 +3,7 @@ import { formatPortfolioAndPieChart, getPriceDataAndFormatPortfolio, editPortfol
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { PieChart } from './pie-chart'
+import './portfolio.css'
 
 class Portfolio extends React.Component {
   editPortfolioToggle () {
