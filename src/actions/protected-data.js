@@ -1,4 +1,4 @@
-import {API_BASE_URL} from '../config';
+import {REACT_APP_API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 
 export const FETCH_PROTECTED_DATA_SUCCESS = 'FETCH_PROTECTED_DATA_SUCCESS';
@@ -15,7 +15,7 @@ export const fetchProtectedDataError = error => ({
 
 export const fetchProtectedData = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    return fetch(`${API_BASE_URL}/protected`, {
+    return fetch(`${REACT_APP_API_BASE_URL}/protected`, {
         method: 'GET',
         headers: {
             // Provide our auth token as credentials

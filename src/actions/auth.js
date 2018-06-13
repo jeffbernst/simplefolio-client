@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode'
 import { SubmissionError } from 'redux-form'
 
-import { API_BASE_URL } from '../config'
+import { REACT_APP_API_BASE_URL } from '../config'
 import { normalizeResponseErrors } from './utils'
 import { saveAuthToken, clearAuthToken } from '../local-storage'
 
@@ -45,7 +45,7 @@ const storeAuthInfo = (authToken, dispatch) => {
 export const login = (username, password) => dispatch => {
   dispatch(authRequest())
   return (
-    fetch(`${API_BASE_URL}/users/login`, {
+    fetch(`${REACT_APP_API_BASE_URL}/users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ export const login = (username, password) => dispatch => {
 export const refreshAuthToken = () => (dispatch, getState) => {
   dispatch(authRequest())
   const authToken = getState().auth.authToken
-  return fetch(`${API_BASE_URL}/users/refresh`, {
+  return fetch(`${REACT_APP_API_BASE_URL}/users/refresh`, {
     method: 'POST',
     headers: {
       // Provide our existing token as credentials to get a new one
