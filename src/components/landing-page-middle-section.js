@@ -1,9 +1,7 @@
 import React from 'react'
 import './landing-page-middle-section.css'
-import { PortfolioEntry } from './portfolio-entry'
 import { PieChart } from './pie-chart'
-import { colors, darkGray } from '../colors'
-import { getPriceData } from '../actions'
+import { getPriceDataAndFormatPortfolio, formatPortfolioAndPieChart } from '../actions'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -16,44 +14,10 @@ const samplePortfolio = [
 
 class LandingPageMiddleSection extends React.Component {
   componentDidMount () {
-    this.props.getPriceData()
+    this.props.getPriceDataAndFormatPortfolio(samplePortfolio)
   }
 
   render () {
-    let portfolioList
-    let pieChartData = []
-    if (this.props.cryptoPriceData)
-      portfolioList = samplePortfolio.map((item, index) => {
-        // iterate through portfolio holdings and match up with current price data
-        const itemData = this.props.cryptoPriceData[item.id]
-        const {name, symbol} = itemData
-        const price = itemData.quotes.USD.price.toFixed(2)
-        const priceWithCommas = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-        const percentChange = itemData.quotes.USD.percent_change_24h
-        const {quantity} = item
-        const balance = (quantity * price).toFixed(2)
-        const colorIndex = index <= colors.length ? index : index % colors.length
-
-        pieChartData.push({
-          theta: balance,
-          symbol,
-          style: {fill: colors[colorIndex], stroke: darkGray, strokeWidth: 3}
-        })
-
-        return (
-          <PortfolioEntry
-            name={name}
-            balance={balance}
-            quantity={quantity}
-            symbol={symbol}
-            price={priceWithCommas}
-            percentChange={percentChange}
-            color={colors[colorIndex]}
-            key={index}
-          />
-        )
-      })
-
     return (
       <div className="background-middle">
         <div className="container">
@@ -62,12 +26,12 @@ class LandingPageMiddleSection extends React.Component {
             and enter how much you own to track your balance.
           </div>
           <div className="portfolio-title">Portfolio</div>
-          <div className="portfolio-sample">
+          <div className="portfolio">
             <div className="portfolio-list">
-              {portfolioList}
+              {this.props.formattedPortfolioList}
             </div>
             <div className="pie-chart">
-              <PieChart pieChartData={pieChartData}/>
+              {this.props.pieChartData && <PieChart pieChartData={this.props.pieChartData}/>}
             </div>
           </div>
         </div>
@@ -79,12 +43,15 @@ class LandingPageMiddleSection extends React.Component {
 function mapStateToProps (state) {
   return {
     loading: state.index.loading,
-    cryptoPriceData: state.index.cryptoPriceData
+    cryptoPriceData: state.index.cryptoPriceData,
+    formattedPortfolioList: state.index.formattedPortfolioList,
+    pieChartData: state.index.pieChartData
   }
 }
 
 const mapDispatchToProps = {
-  getPriceData
+  getPriceDataAndFormatPortfolio,
+  formatPortfolioAndPieChart
 }
 
 export const ConnectedLandingPageMiddleSection = withRouter(connect(mapStateToProps, mapDispatchToProps)(LandingPageMiddleSection))

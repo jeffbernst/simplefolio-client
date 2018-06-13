@@ -1,0 +1,41 @@
+.title-and-button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.portfolio-container button {
+  border: 3px solid var(--dark-gray);
+  background: none;
+  padding: 5px 8px;
+  border-radius: 8px;
+  color: var(--dark-gray);
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.portfolio-container button:hover {
+  background-color: var(--dark-gray);
+  color: white;
+}
+
+.portfolio, .watchlist {
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.watchlist {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 80px;
+}
+
+.portfolio-total {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10px;
+  font-weight: bold;
+  font-size: 24px;
+}
