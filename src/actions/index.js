@@ -27,7 +27,7 @@ import React from 'react'
 import fetch from 'isomorphic-fetch'
 import { colors, darkGray } from '../colors'
 import { PortfolioEntry } from '../components/portfolio-entry'
-import { API_BASE_URL } from '../config'
+import { REACT_APP_API_BASE_URL } from '../config'
 import { normalizeResponseErrors } from './utils'
 import { WatchlistWidget } from '../components/watchlist-widget'
 
@@ -174,7 +174,7 @@ export const getPortfolio = () => async (dispatch, getState) => {
 
   try {
     const authToken = getState().auth.authToken
-    const response = await fetch(`${API_BASE_URL}/users`, {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/users`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${authToken}`
@@ -250,7 +250,7 @@ export const editPortfolio = updatedPortfolioObj => async (dispatch, getState) =
 
   try {
     const authToken = getState().auth.authToken
-    const response = await fetch(`${API_BASE_URL}/users/portfolio`, {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/users/portfolio`, {
       method: 'PUT',
       body: JSON.stringify(updatedPortfolio),
       headers: {
@@ -296,7 +296,7 @@ export const getWatchlist = () => async (dispatch, getState) => {
 
   try {
     const authToken = getState().auth.authToken
-    const response = await fetch(`${API_BASE_URL}/users`, {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/users`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${authToken}`
@@ -343,7 +343,7 @@ export const editWatchlist = updatedWatchlist => async (dispatch, getState) => {
 
   try {
     const authToken = getState().auth.authToken
-    const response = await fetch(`${API_BASE_URL}/users/watchlist`, {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/users/watchlist`, {
       method: 'PUT',
       body: JSON.stringify(updatedWatchlist),
       headers: {
