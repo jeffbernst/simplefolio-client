@@ -20,7 +20,7 @@ describe('getPriceDataSuccess', () => {
 describe('getPriceDataError', () => {
   it('Should return the action', () => {
     const error = 'my error'
-    const action = getPriceDataSuccess(error)
+    const action = getPriceDataError(error)
     expect(action.type).toEqual(GET_PRICE_DATA_ERROR)
     expect(action.payload).toEqual(error)
   })
