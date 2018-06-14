@@ -1,15 +1,65 @@
-import { getPriceDataRequest, getPriceDataSuccess, getPriceDataError } from '../../actions'
-import { GET_PRICE_DATA_REQUEST, GET_PRICE_DATA_SUCCES, GET_PRICE_DATA_ERROR } from '../../actions/types'
+import {
+  getPriceDataRequest,
+  getPriceDataSuccess,
+  getPriceDataError,
+  formatPortfolio,
+  updatePortfolioTotal,
+  editPortfolioToggle,
+  getPortfolioRequest,
+  getPortfolioSuccess,
+  getPortfolioError,
+  getCryptoListingsRequest,
+  getCryptoListingsSuccess,
+  getCryptoListingsError,
+  editPortfolioRequest,
+  editPortfolioSuccess,
+  editPortfolioError,
+  getWatchlistRequest,
+  getWatchlistSuccess,
+  getWatchlistError,
+  formatWatchlist,
+  editWatchlistToggle,
+  editWatchlistRequest,
+  editWatchlistSuccess,
+  editWatchlistError
+} from '../../actions'
+import {
+  GET_PRICE_DATA_REQUEST,
+  GET_PRICE_DATA_SUCCES,
+  GET_PRICE_DATA_ERROR,
+  FORMAT_PORTFOLIO,
+  UPDATE_PORTFOLIO_TOTAL,
+  EDIT_PORTFOLIO_TOGGLE,
+  GET_PORTFOLIO_REQUEST,
+  GET_PORTFOLIO_SUCCESS,
+  GET_PORTFOLIO_ERROR,
+  GET_CRYPTO_LISTINGS_REQUEST,
+  GET_CRYPTO_LISTINGS_SUCCESS,
+  GET_CRYPTO_LISTINGS_ERROR,
+  EDIT_PORTFOLIO_REQUEST,
+  EDIT_PORTFOLIO_SUCCESS,
+  EDIT_PORTFOLIO_ERROR,
+  GET_WATCHLIST_REQUEST,
+  GET_WATCHLIST_SUCCESS,
+  GET_WATCHLIST_ERROR,
+  FORMAT_WATCHLIST,
+  EDIT_WATCHLIST_TOGGLE,
+  EDIT_WATCHLIST_REQUEST,
+  EDIT_WATCHLIST_SUCCESS,
+  EDIT_WATCHLIST_ERROR
+} from '../../actions/types'
+
+// GET PRICE DATA
 
 describe('getPriceDataRequest', () => {
-  it('Should return the action', () => {
+  it('should return the action', () => {
     const action = getPriceDataRequest()
     expect(action.type).toEqual(GET_PRICE_DATA_REQUEST)
   })
 })
 
 describe('getPriceDataSuccess', () => {
-  it('Should return the action', () => {
+  it('should return the action', () => {
     const priceData = {prices: 'lots of prices!'}
     const action = getPriceDataSuccess(priceData)
     expect(action.type).toEqual(GET_PRICE_DATA_SUCCES)
@@ -18,10 +68,212 @@ describe('getPriceDataSuccess', () => {
 })
 
 describe('getPriceDataError', () => {
-  it('Should return the action', () => {
+  it('should return the action', () => {
     const error = 'my error'
     const action = getPriceDataError(error)
     expect(action.type).toEqual(GET_PRICE_DATA_ERROR)
     expect(action.payload).toEqual(error)
   })
 })
+
+// GET PRICE DATA AND THEN FORMAT PORTFOLIO
+
+// TODO test get price data and format portfolio thunk
+
+// FORMAT PORTFOLIO
+
+describe('formatPortfolio', () => {
+  it('should return the action', () => {
+    const portfolioList = ['portfolio list']
+    const pieChartData = 'pie chart data'
+    const action = formatPortfolio(portfolioList, pieChartData)
+    expect(action.type).toEqual(FORMAT_PORTFOLIO)
+    expect(action.portfolioList).toEqual(portfolioList)
+    expect(action.pieChartData).toEqual(pieChartData)
+  })
+})
+
+// TODO format portfolio and pie chart thunk
+
+// UPDATE PORTFOLIO TOTAL
+
+describe('updatePortfolioTotal', () => {
+  it('should return the action', () => {
+    const portfolioTotal = 100
+    const action = updatePortfolioTotal(portfolioTotal)
+    expect(action.type).toEqual(UPDATE_PORTFOLIO_TOTAL)
+    expect(action.payload).toEqual(portfolioTotal)
+  })
+})
+
+// EDIT PORTFOLIO TOGGLE
+
+describe('editPortfolioToggle', () => {
+  it('should return the action', () => {
+    const action = editPortfolioToggle()
+    expect(action.type).toEqual(EDIT_PORTFOLIO_TOGGLE)
+  })
+})
+
+// GET PORTFOLIO DATA
+
+describe('getPortfolioRequest', () => {
+  it('should return the action', () => {
+    const action = getPortfolioRequest()
+    expect(action.type).toEqual(GET_PORTFOLIO_REQUEST)
+  })
+})
+
+describe('getPortfolioSuccess', () => {
+  it('should return the action', () => {
+    const portfolioData = 'portfolio data'
+    const action = getPortfolioSuccess(portfolioData)
+    expect(action.type).toEqual(GET_PORTFOLIO_SUCCESS)
+    expect(action.payload).toEqual(portfolioData)
+  })
+})
+
+describe('getPortfolioError', () => {
+  it('should return the action', () => {
+    const error = 'error'
+    const action = getPortfolioError(error)
+    expect(action.type).toEqual(GET_PORTFOLIO_ERROR)
+    expect(action.payload).toEqual(error)
+  })
+})
+
+// TODO test get portfolio thunk
+
+// GET CRYPTO LISTINGS
+
+describe('getCryptoListingsRequest', () => {
+  it('should return the action', () => {
+    const action = getCryptoListingsRequest()
+    expect(action.type).toEqual(GET_CRYPTO_LISTINGS_REQUEST)
+  })
+})
+
+describe('getCryptoListingsSucess', () => {
+  it('should return the action', () => {
+    const cryptoListings = 'listings'
+    const action = getCryptoListingsSuccess(cryptoListings)
+    expect(action.type).toEqual(GET_CRYPTO_LISTINGS_SUCCESS)
+    expect(action.payload).toEqual(cryptoListings)
+  })
+})
+
+describe('getCryptoListingsError', () => {
+  it('should return an action', () => {
+    const error = 'error'
+    const action = getCryptoListingsError(error)
+    expect(action.type).toEqual(GET_CRYPTO_LISTINGS_ERROR)
+    expect(action.payload).toEqual(error)
+  })
+})
+
+// TODO test get crypto listings thunk
+
+// EDIT PORTFOLIO
+
+describe('editPortfolioRequest', () => {
+  it('should return an action', () => {
+    const action = editPortfolioRequest()
+    expect(action.type).toEqual(EDIT_PORTFOLIO_REQUEST)
+  })
+})
+
+describe('editPortfolioSuccess', () => {
+  it('should return an action', () => {
+    const portfolioData = 'portfolio data'
+    const action = editPortfolioSuccess(portfolioData)
+    expect(action.type).toEqual(EDIT_PORTFOLIO_SUCCESS)
+    expect(action.payload).toEqual(portfolioData)
+  })
+})
+
+describe('editPortfolioError', () => {
+  it('should return an action', () => {
+    const error = 'error'
+    const action = editPortfolioError(error)
+    expect(action.type).toEqual(EDIT_PORTFOLIO_ERROR)
+    expect(action.payload).toEqual(error)
+  })
+})
+
+// TODO test edit portfolio thunk
+
+// GET WATCHLIST
+
+describe('getWatchlistRequest', () => {
+  it('should return an action', () => {
+    const action = getWatchlistRequest()
+    expect(action.type).toEqual(GET_WATCHLIST_REQUEST)
+  })
+})
+
+describe('getWatchlistSuccess', () => {
+  it('should return an action', () => {
+    const watchlistData = 'watchlist data'
+    const action = getWatchlistSuccess(watchlistData)
+    expect(action.type).toEqual(GET_WATCHLIST_SUCCESS)
+    expect(action.payload).toEqual(watchlistData)
+  })
+})
+
+describe('getWatchlistError', () => {
+  it('should return an action', () => {
+    const error = 'error'
+    const action = getWatchlistError(error)
+    expect(action.type).toEqual(GET_WATCHLIST_ERROR)
+    expect(action.payload).toEqual(error)
+  })
+})
+
+describe('formatWatchlist', () => {
+  it('should return an action', () => {
+    const formattedWatchlist = 'formatted watchlist'
+    const action = formatWatchlist(formattedWatchlist)
+    expect(action.type).toEqual(FORMAT_WATCHLIST)
+    expect(action.payload).toEqual(formattedWatchlist)
+  })
+})
+
+// TODO test get watchlist thunk
+
+// EDIT WATCHLIST TOGGLE
+
+describe('editWatchlistToggle', () => {
+  it('should return an action', () => {
+    const action = editWatchlistToggle()
+    expect(action.type).toEqual(EDIT_WATCHLIST_TOGGLE)
+  })
+})
+
+// EDIT WATCHLIST
+
+describe('editWatchlistRequest', () => {
+  it('should return an action', () => {
+    const action = editWatchlistRequest()
+    expect(action.type).toEqual(EDIT_WATCHLIST_REQUEST)
+  })
+})
+
+describe('editWatchlistSuccess', () => {
+  it('should return an action', () => {
+    const watchlistData = 'watchlist data'
+    const action = editWatchlistSuccess(watchlistData)
+    expect(action.type).toEqual(EDIT_WATCHLIST_SUCCESS)
+    expect(action.payload).toEqual(watchlistData)
+  })
+})
+
+describe('editWatchlistError', () => {
+  it('should return an action', () => {
+    const error = 'error'
+    const action = editWatchlistError(error)
+    expect(action.type).toEqual(EDIT_WATCHLIST_ERROR)
+    expect(action.payload).toEqual(error)
+  })
+})
+
+// TODO test edit watchlist thunk
