@@ -29,6 +29,9 @@ class LandingPageMiddleSection extends React.Component {
           <div className="portfolio">
             <div className="portfolio-list">
               {this.props.formattedPortfolioList}
+              <div className="portfolio-total">
+                Total: ${this.props.portfolioTotal}
+              </div>
             </div>
             <div className="pie-chart">
               {this.props.pieChartData && <PieChart pieChartData={this.props.pieChartData}/>}
@@ -45,7 +48,8 @@ function mapStateToProps (state) {
     loading: state.index.loading,
     cryptoPriceData: state.index.cryptoPriceData,
     formattedPortfolioList: state.index.formattedPortfolioList,
-    pieChartData: state.index.pieChartData
+    pieChartData: state.index.pieChartData,
+    portfolioTotal: state.index.portfolioTotal
   }
 }
 
