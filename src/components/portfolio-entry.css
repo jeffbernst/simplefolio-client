@@ -22,7 +22,7 @@
   justify-content: space-between;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1000px) {
   .portfolio-entry {
     max-width: 430px;
   }
