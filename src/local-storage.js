@@ -1,4 +1,5 @@
-require('jest-localstorage-mock')
+// local storage mock for tests
+
 
 export const loadAuthToken = () => {
   return localStorage.getItem('authToken')
