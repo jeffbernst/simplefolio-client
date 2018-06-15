@@ -1,7 +1,7 @@
 .portfolio-entry {
   border: 3px solid var(--dark-gray);
   border-radius: 8px;
-  width: 430px;
+  max-width: 430px;
   box-sizing: border-box;
   padding: 8px;
   margin-bottom: 15px;
