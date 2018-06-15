@@ -7,16 +7,15 @@
   margin: 0 auto;
   padding-top: 160px;
   padding-bottom: 160px;
-  width: 800px;
-  height: 250px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .landing-copy-and-button {
   margin-left: 20px;
-  width: 500px;
+  max-width: 500px;
   text-align: center;
 }
 
@@ -42,4 +41,13 @@ button.get-started {
 button.get-started:hover {
   background-color: white;
   color: var(--pink);
+}
+
+@media (min-width: 900px) {
+  .landing-message {
+    max-width: 800px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
 }

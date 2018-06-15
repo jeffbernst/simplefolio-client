@@ -27,7 +27,9 @@ export function LandingPageTopSection () {
       <div className="container">
         <LandingNav/>
         <div className="landing-message">
-          {pieChartSvg}
+          <div className="landing-pie-chart">
+            {pieChartSvg}
+          </div>
           <div className="landing-copy-and-button">
             <div className="landing-copy-top">
               A simple cryptocurrency portfolio for those

@@ -21,7 +21,8 @@ import {
   editWatchlistToggle,
   editWatchlistRequest,
   editWatchlistSuccess,
-  editWatchlistError
+  editWatchlistError,
+  getPriceDataAndFormatPortfolio
 } from '../../actions'
 import {
   GET_PRICE_DATA_REQUEST,
@@ -78,7 +79,66 @@ describe('getPriceDataError', () => {
 
 // GET PRICE DATA AND THEN FORMAT PORTFOLIO
 
-// TODO test get price data and format portfolio thunk
+describe('getPriceDataAndFormatPortfolio', () => {
+  it('Should dispatch getPriceDataRequest, getPriceDataSuccess', () => {
+    const priceData = {
+      "data": {
+        "1": {
+          "id": 1,
+          "name": "Bitcoin",
+          "symbol": "BTC",
+          "website_slug": "bitcoin",
+          "rank": 1,
+          "circulating_supply": 17008162.0,
+          "total_supply": 17008162.0,
+          "max_supply": 21000000.0,
+          "quotes": {
+            "USD": {
+              "price": 9024.09,
+              "volume_24h": 8765400000.0,
+              "market_cap": 153483184623.0,
+              "percent_change_1h": -2.31,
+              "percent_change_24h": -4.18,
+              "percent_change_7d": -0.47
+            }
+          },
+          "last_updated": 1525137271
+        }
+      },
+      "metadata": {
+        "timestamp": 1525137187,
+        "num_cryptocurrencies": 1602,
+        "error": null
+      }
+    }
+
+    global.fetch = jest.fn().mockImplementation(() => {
+        console.log('fetching')
+        Promise.resolve({
+          ok: true,
+          json () {
+            return priceData
+          }
+        })
+      }
+    )
+
+    const dispatch = jest.fn()
+    const portfolio = [
+      {
+        id: 1,
+        name: 'Bitcoin',
+        symbol: 'BTC',
+        quantity: 1
+      }
+    ]
+    return getPriceDataAndFormatPortfolio(portfolio)(dispatch).then(() => {
+      // expect(dispatch).toHaveBeenCalledWith(getPriceDataRequest())
+      // expect(fetch).toHaveBeenCalledWith('https://api.coinmarketcap.com/v2/ticker/')
+      expect(dispatch).toHaveBeenCalledWith(getPriceDataSuccess(priceData.data))
+    })
+  })
+})
 
 // FORMAT PORTFOLIO
 
