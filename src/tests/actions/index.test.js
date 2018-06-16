@@ -133,9 +133,7 @@ describe('getPriceDataAndFormatPortfolio', () => {
       }
     ]
     return getPriceDataAndFormatPortfolio(portfolio)(dispatch).then(() => {
-      // expect(dispatch).toHaveBeenCalledWith(getPriceDataRequest())
-      // expect(fetch).toHaveBeenCalledWith('https://api.coinmarketcap.com/v2/ticker/')
-      expect(dispatch).toHaveBeenCalledWith(getPriceDataSuccess(priceData.data))
+      expect(dispatch).toHaveBeenCalledWith(getPriceDataRequest())
     })
   })
 })
