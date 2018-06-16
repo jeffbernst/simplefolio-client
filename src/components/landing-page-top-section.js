@@ -7,6 +7,8 @@ import { login } from '../actions/auth'
 
 class LandingPageTopSection extends React.Component {
   tryDemo () {
+    // there are 10 demo accounts
+    // we pick a random one and then log the user in to try it out
     const randomDemoAccountNumber = Math.floor(Math.random() * 10)
     const demoAccountName = 'demo' + randomDemoAccountNumber
     this.props.dispatch(login(demoAccountName, 'trydemoaccount'))
