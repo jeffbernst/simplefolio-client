@@ -24,6 +24,10 @@
 
 .portfolio-list {
   width: 100%;
+  /*height: 100%;*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*justify-content: flex-start;*/
 }
 
 @media (min-width: 1000px) {
