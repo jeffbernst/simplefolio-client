@@ -11,6 +11,7 @@ class LandingPageTopSection extends React.Component {
     // we pick a random one and then log the user in to try it out
     const randomDemoAccountNumber = Math.floor(Math.random() * 10)
     const demoAccountName = 'demo' + randomDemoAccountNumber
+    console.log(`logging into ${demoAccountName}`)
     this.props.dispatch(login(demoAccountName, 'trydemoaccount'))
   }
 
