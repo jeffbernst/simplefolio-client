@@ -22,6 +22,10 @@
   justify-content: space-between;
 }
 
+.portfolio-list {
+  width: 100%;
+}
+
 @media (min-width: 1000px) {
   .portfolio-entry {
     max-width: 430px;
