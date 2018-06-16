@@ -1,3 +1,21 @@
 .rv-xy-plot__inner {
   overflow: visible !important;
 }
+
+.pie-chart-large {
+  display: none;
+}
+
+.pie-chart-small {
+  display: block;
+}
+
+@media (min-width: 500px) {
+  .pie-chart-small {
+    display: none;
+  }
+
+  .pie-chart-large {
+    display: block;
+  }
+}

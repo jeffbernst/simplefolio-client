@@ -7,7 +7,7 @@
 }
 
 .user-nav .site-logo {
-  font-size: 48px;
+  font-size: 26px;
   font-weight: bold;
   color: var(--dark-gray);
   cursor: pointer;
@@ -21,18 +21,29 @@
   color: var(--pink);
 }
 
-.user-nav button {
-  border: 3px solid var(--dark-gray);
-  background: none;
-  padding: 5px 8px;
-  border-radius: 8px;
-  color: var(--dark-gray);
-  font-size: 18px;
-  font-weight: bold;
-  margin-left: 10px;
+.logout {
+  padding: 5px !important;
+  font-size: 14px !important;
 }
 
-.user-nav button:hover {
+.logout:hover {
   background-color: var(--dark-gray);
   color: white;
+}
+
+@media (min-width: 370px) {
+  .user-nav .site-logo {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 550px) {
+  .user-nav .site-logo {
+    font-size: 48px;
+  }
+
+  .logout {
+    padding: 5px 8px !important;
+    font-size: 18px !important;
+  }
 }

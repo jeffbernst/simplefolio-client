@@ -6,7 +6,7 @@
 }
 
 .landing-nav .site-logo {
-  font-size: 48px;
+  font-size: 20px;
   font-weight: bold;
   color: white;
   cursor: pointer;
@@ -23,15 +23,37 @@
 .landing-nav button {
   border: 3px solid white;
   background: none;
-  padding: 5px 8px;
+  padding: 3px;
   border-radius: 8px;
   color: white;
-  font-size: 18px;
+  font-size: 12px;
   font-weight: bold;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .landing-nav button:hover {
   background-color: white;
   color: var(--purple);
+}
+
+@media (min-width: 370px) {
+  .landing-nav .site-logo {
+    font-size: 26px;
+  }
+
+  .landing-nav button {
+    padding: 5px;
+  }
+}
+
+@media (min-width: 550px) {
+  .landing-nav .site-logo {
+    font-size: 48px;
+  }
+
+  .landing-nav button {
+    padding: 5px 8px;
+    font-size: 18px;
+    margin-left: 10px;
+  }
 }

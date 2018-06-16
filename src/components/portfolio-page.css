@@ -20,22 +20,16 @@
   color: white;
 }
 
-.portfolio, .watchlist {
-  margin-top: 20px;
-  margin-bottom: 50px;
-}
-
-.watchlist {
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 80px;
-}
-
 .portfolio-total {
   display: flex;
   justify-content: flex-end;
-  padding-right: 10px;
   font-weight: bold;
   font-size: 24px;
+  max-width: 1000px;
+}
+
+@media (min-width: 1000px) {
+  .portfolio-total {
+    max-width: 430px;
+  }
 }

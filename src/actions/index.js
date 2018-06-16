@@ -90,7 +90,7 @@ export const getPriceDataAndFormatPortfolio = portfolio => async dispatch => {
 
 // FORMAT PORTFOLIO
 
-const formatPortfolio = (portfolioList, pieChartData) => ({
+export const formatPortfolio = (portfolioList, pieChartData) => ({
   type: FORMAT_PORTFOLIO,
   portfolioList,
   pieChartData
@@ -155,16 +155,16 @@ export const editPortfolioToggle = () => ({
 
 // GET PORTFOLIO DATA
 
-const getPortfolioRequest = () => ({
+export const getPortfolioRequest = () => ({
   type: GET_PORTFOLIO_REQUEST
 })
 
-const getPortfolioSuccess = portfolioData => ({
+export const getPortfolioSuccess = portfolioData => ({
   type: GET_PORTFOLIO_SUCCESS,
   payload: portfolioData
 })
 
-const getPortfolioError = error => ({
+export const getPortfolioError = error => ({
   type: GET_PORTFOLIO_ERROR,
   payload: error
 })
@@ -194,16 +194,16 @@ export const getPortfolio = () => async (dispatch, getState) => {
 
 // GET CRYPTO LISTINGS
 
-const getCryptoListingsRequest = () => ({
+export const getCryptoListingsRequest = () => ({
   type: GET_CRYPTO_LISTINGS_REQUEST
 })
 
-const getCryptoListingsSuccess = cryptoListings => ({
+export const getCryptoListingsSuccess = cryptoListings => ({
   type: GET_CRYPTO_LISTINGS_SUCCESS,
   payload: cryptoListings
 })
 
-const getCryptoListingsError = error => ({
+export const getCryptoListingsError = error => ({
   type: GET_CRYPTO_LISTINGS_ERROR,
   payload: error
 })
@@ -225,16 +225,16 @@ export const getCryptoListings = () => async dispatch => {
 
 // EDIT PORTFOLIO
 
-const editPortfolioRequest = () => ({
+export const editPortfolioRequest = () => ({
   type: EDIT_PORTFOLIO_REQUEST
 })
 
-const editPortfolioSuccess = portfolioData => ({
+export const editPortfolioSuccess = portfolioData => ({
   type: EDIT_PORTFOLIO_SUCCESS,
   payload: portfolioData
 })
 
-const editPortfolioError = error => ({
+export const editPortfolioError = error => ({
   type: EDIT_PORTFOLIO_ERROR,
   payload: error
 })
@@ -272,21 +272,21 @@ export const editPortfolio = updatedPortfolioObj => async (dispatch, getState) =
 
 // GET WATCHLIST
 
-const getWatchlistRequest = () => ({
+export const getWatchlistRequest = () => ({
   type: GET_WATCHLIST_REQUEST
 })
 
-const getWatchlistSuccess = watchlistData => ({
+export const getWatchlistSuccess = watchlistData => ({
   type: GET_WATCHLIST_SUCCESS,
   payload: watchlistData
 })
 
-const getWatchlistError = error => ({
+export const getWatchlistError = error => ({
   type: GET_WATCHLIST_ERROR,
   payload: error
 })
 
-const formatWatchlist = formattedWatchlist => ({
+export const formatWatchlist = formattedWatchlist => ({
   type: FORMAT_WATCHLIST,
   payload: formattedWatchlist
 })
@@ -322,18 +322,18 @@ export const editWatchlistToggle = () => ({
   type: EDIT_WATCHLIST_TOGGLE
 })
 
-// EDIT WATCHLIST TOGGLE
+// EDIT WATCHLIST
 
-const editWatchlistRequest = () => ({
+export const editWatchlistRequest = () => ({
   type: EDIT_WATCHLIST_REQUEST
 })
 
-const editWatchlistSuccess = watchlistData => ({
+export const editWatchlistSuccess = watchlistData => ({
   type: EDIT_WATCHLIST_SUCCESS,
   payload: watchlistData
 })
 
-const editWatchlistError = error => ({
+export const editWatchlistError = error => ({
   type: EDIT_WATCHLIST_ERROR,
   payload: error
 })

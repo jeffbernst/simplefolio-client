@@ -13,7 +13,7 @@ class UserNav extends React.Component {
 
   render () {
     return (
-      <nav className='user-nav container'>
+      <nav className='user-nav'>
         <Link to={'/'}>
           <div className="site-logo fade-in-out">Simplefol.io</div>
         </Link>
