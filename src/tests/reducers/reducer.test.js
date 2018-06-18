@@ -1,10 +1,11 @@
 import { reducer } from '../../reducers/reducer'
 import {
-  editPortfolioToggle, editWatchlistToggle,
+  editPortfolioSuccess,
+  editPortfolioToggle, editWatchlistSuccess, editWatchlistToggle,
   getCryptoListingsSuccess,
   getPortfolioSuccess,
   getPriceDataRequest,
-  getPriceDataSuccess
+  getPriceDataSuccess, getWatchlistSuccess, updatePortfolioTotal
 } from '../../actions'
 
 describe('main reducer', () => {
@@ -137,6 +138,69 @@ describe('main reducer', () => {
       let state
       state = reducer(state, editWatchlistToggle())
       expect(state.editWatchlist).toEqual(true)
+    })
+  })
+
+  describe('update portfolio total', () => {
+    it('should update portfolio total', () => {
+      let state
+      state = reducer(state, updatePortfolioTotal(5))
+      expect(state.portfolioTotal).toEqual(5)
+    })
+  })
+
+  describe('edit portfolio', () => {
+    it('should return portfolioData when fetch succeeds', () => {
+      const portfolioData = [
+        {
+          name: 'Bitcoin',
+          symbol: 'BTC',
+          id: 1,
+          quantity: 1
+        }
+      ]
+
+      let state
+      state = reducer(state, editPortfolioSuccess(portfolioData))
+      expect(state.portfolioData).toEqual(portfolioData)
+    })
+  })
+
+  describe('get watchlist', () => {
+    it('should update watchlist data upon fetch success', () => {
+      const watchlistData = [
+        {
+          name: 'Bitcoin',
+          symbol: 'BTC',
+          id: 1
+        }
+      ]
+
+      let state
+      state = reducer(state, getWatchlistSuccess(watchlistData))
+      expect(state.watchlistData).toEqual(watchlistData)
+    })
+  })
+
+  describe('edit watchlist', () => {
+    it('should toggle editWatchlist', () => {
+      let state
+      state = reducer(state, editWatchlistToggle())
+      expect(state.editWatchlist).toEqual(true)
+    })
+
+    it('should return watchlistData after successfully editing', () => {
+      const watchlistData = [
+        {
+          name: 'Bitcoin',
+          symbol: 'BTC',
+          id: 1
+        }
+      ]
+
+      let state
+      state = reducer(state, editWatchlistSuccess(watchlistData))
+      expect(state.watchlistData).toEqual(watchlistData)
     })
   })
 })
