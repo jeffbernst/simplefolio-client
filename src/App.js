@@ -11,9 +11,12 @@ import { connect } from 'react-redux'
 class App extends Component {
   render () {
     const rootComponent = this.props.loggedIn ? ConnectedPortfolioPage : LandingPage
-    // return null if loading to avoid loading
-    // landing page when logged in
-    if (this.props.loading) return null
+    if (this.props.loading)
+      return (
+        <div className="loading-spinner">Loading &nbsp;
+          <span role='img' aria-label='thumbs up emoji'>&#128077;</span>
+        </div>
+      )
 
     return (
       <div>
