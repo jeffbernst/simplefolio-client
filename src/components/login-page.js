@@ -2,7 +2,7 @@ import React from 'react'
 import { LandingNav } from './landing-nav'
 import './login.css'
 import LoginForm from './login-form'
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 function LoginPage (props) {

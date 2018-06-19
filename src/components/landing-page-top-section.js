@@ -15,7 +15,7 @@ class LandingPageTopSection extends React.Component {
     this.props.dispatch(login(demoAccountName, 'trydemoaccount'))
   }
 
-  render() {
+  render () {
     const pieChartSvg =
       <svg width='251' height='250' viewBox='0 0 251 250' xmlns='http://www.w3.org/2000/svg'>
         {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}

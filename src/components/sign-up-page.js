@@ -2,7 +2,7 @@ import React from 'react'
 import { LandingNav } from './landing-nav'
 import './sign-up.css'
 import { connect } from 'react-redux'
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom'
 import SignUpForm from './sign-up-form'
 
 function SignUpPage (props) {

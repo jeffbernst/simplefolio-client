@@ -27,6 +27,6 @@ class UserNav extends React.Component {
 
 const mapStateToProps = state => ({
   loggedIn: state.auth.currentUser !== null
-});
+})
 
-export default connect(mapStateToProps)(UserNav);
+export default connect(mapStateToProps)(UserNav)
