@@ -6,6 +6,6 @@ import EditPortfolio from '../../components/edit-portfolio'
 
 describe('<EditPortfolio />', () => {
   it('Renders without crashing', () => {
-    shallow(<EditPortfolio store={store} />)
+    shallow(<EditPortfolio store={store}/>)
   })
 })

@@ -10,7 +10,7 @@ import {
   clearAuth,
   authRequest,
   authSuccess,
-  authError
+  authError,
 } from '../../actions/auth'
 
 describe('setAuthToken', () => {
@@ -51,5 +51,3 @@ describe('authError', () => {
     expect(action.error).toEqual(error)
   })
 })
-
-// TODO test storeAuthInfo, login, and refreshAuthToken

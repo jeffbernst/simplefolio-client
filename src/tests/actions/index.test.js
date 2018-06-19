@@ -22,7 +22,9 @@ import {
   editWatchlistRequest,
   editWatchlistSuccess,
   editWatchlistError,
-  getPriceDataAndFormatPortfolio
+  getPriceDataAndFormatPortfolio,
+  getPortfolio,
+  getCryptoListings
 } from '../../actions'
 import {
   GET_PRICE_DATA_REQUEST,
@@ -49,6 +51,7 @@ import {
   EDIT_WATCHLIST_SUCCESS,
   EDIT_WATCHLIST_ERROR
 } from '../../actions/types'
+import { REACT_APP_API_BASE_URL } from '../../config'
 
 // GET PRICE DATA
 
@@ -82,33 +85,33 @@ describe('getPriceDataError', () => {
 describe('getPriceDataAndFormatPortfolio', () => {
   it('Should dispatch getPriceDataRequest, getPriceDataSuccess', () => {
     const priceData = {
-      "data": {
-        "1": {
-          "id": 1,
-          "name": "Bitcoin",
-          "symbol": "BTC",
-          "website_slug": "bitcoin",
-          "rank": 1,
-          "circulating_supply": 17008162.0,
-          "total_supply": 17008162.0,
-          "max_supply": 21000000.0,
-          "quotes": {
-            "USD": {
-              "price": 9024.09,
-              "volume_24h": 8765400000.0,
-              "market_cap": 153483184623.0,
-              "percent_change_1h": -2.31,
-              "percent_change_24h": -4.18,
-              "percent_change_7d": -0.47
+      'data': {
+        '1': {
+          'id': 1,
+          'name': 'Bitcoin',
+          'symbol': 'BTC',
+          'website_slug': 'bitcoin',
+          'rank': 1,
+          'circulating_supply': 17008162.0,
+          'total_supply': 17008162.0,
+          'max_supply': 21000000.0,
+          'quotes': {
+            'USD': {
+              'price': 9024.09,
+              'volume_24h': 8765400000.0,
+              'market_cap': 153483184623.0,
+              'percent_change_1h': -2.31,
+              'percent_change_24h': -4.18,
+              'percent_change_7d': -0.47
             }
           },
-          "last_updated": 1525137271
+          'last_updated': 1525137271
         }
       },
-      "metadata": {
-        "timestamp": 1525137187,
-        "num_cryptocurrencies": 1602,
-        "error": null
+      'metadata': {
+        'timestamp': 1525137187,
+        'num_cryptocurrencies': 1602,
+        'error': null
       }
     }
 
@@ -150,8 +153,6 @@ describe('formatPortfolio', () => {
     expect(action.pieChartData).toEqual(pieChartData)
   })
 })
-
-// TODO format portfolio and pie chart thunk
 
 // UPDATE PORTFOLIO TOTAL
 
@@ -200,7 +201,34 @@ describe('getPortfolioError', () => {
   })
 })
 
-// TODO test get portfolio thunk
+describe('getPortfolio', () => {
+  it('Should dispatch getPriceDataRequest, getPriceDataSuccess', () => {
+    const portfolio = [
+      {
+        name: 'Bitcoin',
+        symbol: 'BTC',
+        id: 1,
+        quantity: 1
+      }
+    ]
+
+    global.fetch = jest.fn().mockImplementation(() => {
+        console.log('fetching')
+        Promise.resolve({
+          ok: true,
+          json () {
+            return portfolio
+          }
+        })
+      }
+    )
+
+    const dispatch = jest.fn()
+    return getPortfolio()(dispatch).then(() => {
+      expect(dispatch).toHaveBeenCalledWith(getPortfolioRequest())
+    })
+  })
+})
 
 // GET CRYPTO LISTINGS
 
@@ -229,7 +257,47 @@ describe('getCryptoListingsError', () => {
   })
 })
 
-// TODO test get crypto listings thunk
+describe('getCryptoListings', () => {
+  it('Should dispatch getCryptoListingsRequest', () => {
+    const cryptoListings = {
+      'data': [
+        {
+          'id': 1,
+          'name': 'Bitcoin',
+          'symbol': 'BTC',
+          'website_slug': 'bitcoin'
+        },
+        {
+          'id': 2,
+          'name': 'Litecoin',
+          'symbol': 'LTC',
+          'website_slug': 'litecoin'
+        },
+      ],
+      'metadata': {
+        'timestamp': 1525137187,
+        'num_cryptocurrencies': 1602,
+        'error': null
+      }
+    }
+
+    global.fetch = jest.fn().mockImplementation(() => {
+        console.log('fetching')
+        Promise.resolve({
+          ok: true,
+          json () {
+            return cryptoListings
+          }
+        })
+      }
+    )
+
+    const dispatch = jest.fn()
+    return getCryptoListings()(dispatch).then(() => {
+      expect(dispatch).toHaveBeenCalledWith(getCryptoListingsRequest())
+    })
+  })
+})
 
 // EDIT PORTFOLIO
 
@@ -257,8 +325,6 @@ describe('editPortfolioError', () => {
     expect(action.payload).toEqual(error)
   })
 })
-
-// TODO test edit portfolio thunk
 
 // GET WATCHLIST
 
@@ -296,8 +362,6 @@ describe('formatWatchlist', () => {
   })
 })
 
-// TODO test get watchlist thunk
-
 // EDIT WATCHLIST TOGGLE
 
 describe('editWatchlistToggle', () => {
@@ -333,5 +397,3 @@ describe('editWatchlistError', () => {
     expect(action.payload).toEqual(error)
   })
 })
-
-// TODO test edit watchlist thunk

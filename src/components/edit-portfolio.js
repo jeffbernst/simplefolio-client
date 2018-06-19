@@ -176,7 +176,7 @@ class EditPortfolio extends React.Component {
             <button type='button' className="edit fade-in-out" onClick={this.addCrypto}>Add</button>
           </div>
           <div className='edit-message already-added'
-                  style={{display: alreadyAdded}}>
+               style={{display: alreadyAdded}}>
             Already added!
             <span role='img' aria-label='pointing up emoji'>&#128070;</span>
           </div>

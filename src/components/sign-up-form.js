@@ -12,10 +12,13 @@ const matchesPassword = matches('password')
 class SignUpForm extends React.Component {
   onSubmit (values) {
     const {username, password} = values
-    const user = {username, password}
+    const user = {
+      username: username.toLowerCase(),
+      password
+    }
     return this.props
       .dispatch(registerUser(user))
-      .then(() => this.props.dispatch(login(username, password)))
+      .then(() => this.props.dispatch(login(username.toLowerCase(), password)))
   }
 
   render () {
