@@ -21,3 +21,9 @@ This site was built with React/Router/Redux.
 ## API Documentation
 
 Please see the [back end repo](https://github.com/jeffbernst/simplefolio-api) for the API documentation.
+
+## Usage & Installation
+
+Getting a copy of this project running locally shouldn't be too difficult. There is one environmental variable used on the server to point to the API, but if you get a local copy of the [API](https://github.com/jeffbernst/simplefolio-api) up and running there won't be any problems. After making a local clone, just run `npm install` and then `npm start`.
+
+The only feature that won't work initially is the "or try a demo" link under the "Get Started" button. Take a look at the `tryDemo` function in `landing-page-top-section.js` to see the format of the 10 demo accounts that are required. Just let me know if you have any questions about how to set them up.
