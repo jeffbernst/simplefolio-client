@@ -10,7 +10,7 @@ export function LandingPageBottomSection () {
     <div className="background-bottom">
       <div className="container">
         <div className="landing-copy">
-          Simplefolio also has a watchlist feature to track the coins you're interested in.
+          There's also a watchlist feature to track what you're interested in.
         </div>
         <div className="portfolio-title">Watchlist</div>
         <div className="watchlist">

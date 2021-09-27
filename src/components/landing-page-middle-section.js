@@ -8,8 +8,8 @@ import { connect } from 'react-redux'
 const samplePortfolio = [
   {id: 1, quantity: 0.1},
   {id: 1027, quantity: 1},
-  {id: 1230, quantity: 150},
-  {id: 1697, quantity: 500}
+  {id: 5426, quantity: 10},
+  {id: 2011, quantity: 50}
 ]
 
 class LandingPageMiddleSection extends React.Component {
@@ -22,8 +22,7 @@ class LandingPageMiddleSection extends React.Component {
       <div className="background-middle">
         <div className="container">
           <div className="landing-copy">
-            It comes with a super simple portfolio feature. Just pick a cryptocurrency
-            and enter how much you own to track your balance.
+            Just pick a cryptocurrency and enter how much you own to track your balance.
           </div>
           <div className="portfolio-title">Portfolio</div>
           <div className="portfolio">

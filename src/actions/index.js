@@ -53,34 +53,21 @@ export const getPriceDataAndFormatPortfolio = portfolio => async dispatch => {
   dispatch(getPriceDataRequest())
 
   try {
-    const response = await fetch('https://api.coinmarketcap.com/v2/ticker/')
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/ticker`)
     const data = await response.json()
 
-    // initial fetch only gets price data for top 100 cryptocurrencies
-    // need to check which ones we don't have and retrieve individually
-    const priceData = data.data
-    const priceDataKeys = Object.keys(priceData)
-    const cryptoNamesInPriceData = priceDataKeys.map(key => priceData[key].name)
-
-    const notIncludedInPriceData = portfolio.filter(crypto => {
-      return !cryptoNamesInPriceData.includes(crypto.name)
-    })
-
-    const priceDataPromises = notIncludedInPriceData.map(crypto => {
-      return fetch(`https://api.coinmarketcap.com/v2/ticker/${crypto.id}/`)
-    })
-
-    Promise.all(priceDataPromises)
-      .then(allResponses => {
-        Promise.all(allResponses.map(response => response.json()))
-          .then(allResponses => allResponses.forEach(singleData => {
-            priceData[singleData.data.id] = singleData.data
-          }))
-          .then(() => dispatch(formatPortfolioAndPieChart(portfolio, priceData)))
-      })
-      .catch(err => console.error(err))
+    // TODO: handle fetching tokens not included in top 100
+    const priceData = data.tickers.data.reduce((accumulator, ticker) => ({
+      ...accumulator,
+      [ticker.id]: {
+        name: ticker.name,
+        symbol: ticker.symbol,
+        quotes: ticker.quote,
+      }
+    }), {})
 
     dispatch(getPriceDataSuccess(priceData))
+    dispatch(formatPortfolioAndPieChart(portfolio, priceData))
 
   } catch (err) {
     console.error('error message: ', err)
@@ -212,10 +199,11 @@ export const getCryptoListings = () => async dispatch => {
   dispatch(getCryptoListingsRequest())
 
   try {
-    const response = await fetch('https://api.coinmarketcap.com/v2/listings/')
+    // TODO: handle fetching tokens not included in top 100
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/ticker`)
     const data = await response.json()
 
-    dispatch(getCryptoListingsSuccess(data.data))
+    dispatch(getCryptoListingsSuccess(data.tickers.data))
 
   } catch (err) {
     console.log('error message: ', err)
