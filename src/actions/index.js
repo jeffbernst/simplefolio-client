@@ -56,7 +56,7 @@ export const getPriceDataAndFormatPortfolio = portfolio => async dispatch => {
     const response = await fetch(`${REACT_APP_API_BASE_URL}/ticker`)
     const data = await response.json()
 
-    // TODO: handle fetching tokens not included in top 100
+    // TODO: Handle fetching tokens not included in top 100
     const priceData = data.tickers.data.reduce((accumulator, ticker) => ({
       ...accumulator,
       [ticker.id]: {
@@ -199,7 +199,7 @@ export const getCryptoListings = () => async dispatch => {
   dispatch(getCryptoListingsRequest())
 
   try {
-    // TODO: handle fetching tokens not included in top 100
+    // TODO: Handle fetching tokens not included in top 100
     const response = await fetch(`${REACT_APP_API_BASE_URL}/ticker`)
     const data = await response.json()
 
